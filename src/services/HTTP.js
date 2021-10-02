@@ -1,0 +1,24 @@
+import * as Config from '../constants/Config';
+import axios from 'axios';
+
+
+export default callApi = async (endpoint, method = 'GET', body, header = '') => {
+  console.log('123');
+  header = {
+    "api-key": Config.API_KEY
+  }
+  return axios({
+    method: method,
+    url: `${Config.API_URL}${endpoint}`,
+    data: body,
+    headers: header,
+    timeout: 90000,
+  }).then(response => {
+    console.log('HTTP', response);
+    return response.data;
+  }).catch((error) => {
+    console.log('HTTP123', error);
+    return error.response
+  });
+}
+
