@@ -28,14 +28,14 @@ export default function Step2({ onNextStep2, setLoading }) {
                 const images = await cameraRef?.current.capture()
 
                 setData(prevState => {
-                    return { ...prevState, center: [...prevState.center, images] }
+                    return { ...prevState, center: [...prevState.center, images.uri] }
                 })
             }
             if (i > 8 && i < 12) {
                 const images = await cameraRef?.current.capture()
 
                 setData(prevState => {
-                    return { ...prevState, left: [...prevState.left, images] }
+                    return { ...prevState, left: [...prevState.left, images.uri] }
                 })
             }
             if (i > 14 && i < 18) {
@@ -43,16 +43,14 @@ export default function Step2({ onNextStep2, setLoading }) {
 
                 let dataLocal = {}
                 await setData(prevState => {
-                    dataLocal = { ...prevState, right: [...prevState.right, images] }
-                    return { ...prevState, right: [...prevState.right, images] }
+                    dataLocal = { ...prevState, right: [...prevState.right, images.uri] }
+                    return { ...prevState, right: [...prevState.right, images.uri] }
                 })
 
                 if (i === 17) {
                     setTimer(-1)
                     setLoading(true)
                     onNextStep2(dataLocal)
-                    // setActiveStep(0)
-
                 }
             }
         }
@@ -64,41 +62,6 @@ export default function Step2({ onNextStep2, setLoading }) {
         setData({
             left: [], center: [], right: []
         })
-        // let left = []
-        // let center = []
-        // let right = []
-        // let i = -1
-        // var x = await setInterval(async () => {
-        //     i++
-        //     console.log(i);
-        //     setTimer(i)
-        //     if (i > 2 && i < 6) {
-        //         const images = await cameraRef?.current.capture({ valueCapture: `image${i}` })
-        //         center.push(images)
-
-        //     }
-        //     if (i > 8 && i < 12) {
-        //         const images = await cameraRef?.current.capture({ valueCapture: `image${i}` })
-        //         left.push(images)
-        //     }
-        //     if (i > 14 && i < 18) {
-        //         const images = await cameraRef?.current.capture({ valueCapture: `image${i}` })
-        //         right.push(images)
-        //     }
-
-        //     if (i == 17) {
-        //         clearInterval(x)
-        //         await setTimer(-1)
-
-        //         await setData({
-        //             left, right, center
-        //         })
-        //         await setisPlaying(false)
-
-        //         onNextStep2({ left, center, right })
-
-        //     }
-        // }, 1000);
     }, [valueCapture]);
 
 
@@ -232,21 +195,21 @@ export default function Step2({ onNextStep2, setLoading }) {
             {/* {
                 data.left.map((item, index) => {
                     return (
-                        <Image source={{ uri: item.uri }} style={{ width: 200, height: 200 }} />
+                        <Image source={{ uri: item }} style={{ width: 200, height: 200 }} />
                     )
                 })
             }
             {
                 data.center.map((item, index) => {
                     return (
-                        <Image source={{ uri: item.uri }} style={{ width: 200, height: 200 }} />
+                        <Image source={{ uri: item }} style={{ width: 200, height: 200 }} />
                     )
                 })
             }
             {
                 data.right.map((item, index) => {
                     return (
-                        <Image source={{ uri: item.uri }} style={{ width: 200, height: 200 }} />
+                        <Image source={{ uri: item }} style={{ width: 200, height: 200 }} />
                     )
                 })
             } */}

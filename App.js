@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Image, LogBox, View, Text, StyleSheet, Dimensions, TouchableOpacity, SafeAreaView, StatusBar, ActivityIndicator } from 'react-native'
+import { Platform, Image, LogBox, View, Text, StyleSheet, Dimensions, TouchableOpacity, SafeAreaView, StatusBar, ActivityIndicator } from 'react-native'
 import { ProgressSteps, ProgressStep } from './src/components/react-native-progress-steps';
 // import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
 import Step1 from './src/step/Step1';
@@ -10,6 +10,7 @@ import { Modalize } from 'react-native-modalize';
 import callApi from './src/services/HTTP';
 import Toast from 'react-native-simple-toast';
 import { readFile as read, writeFile as write } from "react-native-fs";
+import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
 const { width, height } = Dimensions.get('window');
 const scale = width / 360
@@ -30,6 +31,37 @@ const defaultScrollViewProps = {
 
 
 export default function App() {
+
+  const requestPermission = (data) => {
+    if (data == 'denied') {
+      request(Platform.OS === 'android' ? PERMISSIONS.ANDROID.CAMERA : PERMISSIONS.IOS.CAMERA).then((result) => {
+        if (result === 'blocked') {
+          Toast.showWithGravity('Bạn phải cấp quyền thiết bị!', Toast.LONG, Toast.CENTER)
+        }
+        if (result === 'denied') {
+          requestPermission(result)
+        }
+      });
+    }
+  }
+
+  const checkPermission = () => {
+    check(Platform.OS === 'android' ? PERMISSIONS.ANDROID.CAMERA : PERMISSIONS.IOS.CAMERA).then(res => {
+      if (res === 'blocked') {
+        Toast.showWithGravity('Bạn phải cấp quyền thiết bị!', Toast.LONG, Toast.CENTER)
+      }
+      if (res === 'denied') {
+        requestPermission(res)
+      }
+    }).catch(e => {
+      Toast.showWithGravity('Có lỗi', Toast.LONG, Toast.CENTER)
+    })
+  }
+  useEffect(() => {
+    checkPermission()
+  }, [])
+
+
   const modalizeRef = useRef(null);
   const [loading, setLoading] = useState(false)
 
@@ -73,7 +105,6 @@ export default function App() {
     })
   }
 
-  console.log('data', data);
 
   const onNextStep1 = () => {
     var body = {
@@ -128,18 +159,18 @@ export default function App() {
 
 
     for await (let [index, element] of data.center?.entries()) {
-      await read(element.uri, "base64").then(contents => {
+      await read(element, "base64").then(contents => {
         center[index] = contents
       });
     }
 
     for await (let [index, element] of data.left?.entries()) {
-      await read(element.uri, "base64").then(contents => {
+      await read(element, "base64").then(contents => {
         left[index] = contents
       });
     }
     for await (let [index, element] of data.right?.entries()) {
-      await read(element.uri, "base64").then(contents => {
+      await read(element, "base64").then(contents => {
         right[index] = contents
       });
     }
@@ -184,6 +215,7 @@ export default function App() {
         "action": 'LEFT_POSE_HEAD'
       }]
     }
+    console.log('body', body);
     callApi('v2/images:liveness', 'POST', body).then(res => {
       console.log('liveness', res);
       // [{score: 1, isLive: true},{score: 1, isLive: true},{score: 1, isLive: true}]
@@ -218,9 +250,7 @@ export default function App() {
     });
   }
 
-  console.log('dataResss', dataResponse);
-
-
+  // console.log('dataResss', dataResponse);
 
 
   return (
@@ -265,7 +295,7 @@ export default function App() {
             <ProgressStep
               removeBtnRow={true}
               label={`Thông tin\nhợp đồng`}
-              scrollViewProps={defaultScrollViewProps}
+            // scrollViewProps={defaultScrollViewProps}
 
             >
               <Step4 dataResponse={dataResponse} data={data} setActiveStep={setActiveStep} clearData={clearData} />
@@ -292,7 +322,7 @@ export default function App() {
       >
         <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 35 * scale, }}>
           <TouchableOpacity
-            onPress={() => changeUpload('camera')}
+            onPress={() => { checkPermission(), changeUpload('camera') }}
             style={{ flexDirection: 'row', paddingHorizontal: 20 * scale, justifyContent: 'center', alignItems: 'center' }}>
             <Image source={require('./src/assets/upload_camera.png')} style={{ width: 24 * scale, height: 24 * scale, marginRight: 3 * scale }} />
             <Text style={{ fontSize: 16 * scale, fontWeight: 'bold' }}>Camera</Text>

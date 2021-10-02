@@ -23,7 +23,7 @@ export default function Step3({ onNextStep3, setLoading }) {
                 width: 240 * scale,
                 borderRadius: (240 * scale) / 2,
                 overflow: 'hidden',
-                backgroundColor: 'red'
+                backgroundColor: 'black'
             }}>
                 <Camera
                     style={{
@@ -32,7 +32,7 @@ export default function Step3({ onNextStep3, setLoading }) {
                         borderRadius: (240 * scale) / 2,
                         overflow: 'hidden',
                     }}
-                    flashMode="auto" // on/off/auto(default)
+                    flashMode="off" // on/off/auto(default)
                     focusMode="on" // off/on(default)
                     zoomMode="off" // off/on(default)
                     torchMode="off" // on/off(default)

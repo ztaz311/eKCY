@@ -10,7 +10,7 @@ class StepIcon extends Component {
       case 1:
         return <Image source={require('../../assets/cmnd.png')} style={{ width: 20, height: 20 }} resizeMode="contain" />
       case 2:
-        return <Image source={require('../../assets/liveness.png')} style={{ width: 40, height: 40, marginTop: -10, marginLeft: -2, tintColor: this.props.isActiveStep ? 'white' : null }} resizeMode="contain" />
+        return <Image source={require('../../assets/liveness.png')} style={{ width: 40, height: 40, marginTop: -10, marginLeft: -3, tintColor: this.props.isActiveStep ? 'white' : null }} resizeMode="contain" />
       case 3:
         return <Image source={require('../../assets/scanface2.png')} style={{ width: 20, height: 20, tintColor: this.props.isActiveStep ? 'white' : null }} resizeMode="contain" />
       case 4:

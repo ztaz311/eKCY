@@ -284,11 +284,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>react-native-create-thumbnail.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>react-native-image-picker.xcscheme</key>
 		<dict>
 			<key>isShown</key>

@@ -46,7 +46,7 @@ function CameraComponent({ isPlaying, cameraRef, setisPlaying, setTimer }) {
                                     width: 240 * scale,
                                 }}
 
-                                flashMode="auto" // on/off/auto(default)
+                                flashMode="off" // on/off/auto(default)
                                 focusMode="on" // off/on(default)
                                 zoomMode="off" // off/on(default)
                                 torchMode="off" // on/off(default)

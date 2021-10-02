@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
+
 const { width, height } = Dimensions.get('window');
 const scale = width / 360
 export default function Step1({ onOpenModalize, upload, onCloseModalize, setUpload, data, setData }) {
+
 
     const [choose, setChoose] = useState('front')
 

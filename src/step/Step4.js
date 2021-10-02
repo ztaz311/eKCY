@@ -4,7 +4,6 @@ import { View, Text, Image, Dimensions, TouchableOpacity } from 'react-native'
 const { width, height } = Dimensions.get('window');
 const scale = width / 360
 export default function Step4({ dataResponse, data, setActiveStep, clearData }) {
-    console.log('data1', data)
 
     return (
         <View style={{ flex: 1, justifyContent: 'flex-start' }}>
@@ -45,7 +44,7 @@ export default function Step4({ dataResponse, data, setActiveStep, clearData }) 
                     <Text style={{ color: 'white', fontSize: 15 * scale, fontWeight: 'bold', flex: 2 / 5 }}>{dataResponse?.card_end && dataResponse?.card_end[2]?.description || 'N/A'}</Text>
                 </View>
 
-                <TouchableOpacity style={{ marginTop: 50 * scale, alignSelf: 'center', backgroundColor: '#4BB543' }} onPress={() => { clearData(), setActiveStep(0) }}>
+                <TouchableOpacity style={{ marginBottom: 20, marginTop: 50 * scale, alignSelf: 'center', backgroundColor: '#4BB543' }} onPress={() => { clearData(), setActiveStep(0) }}>
                     <Text style={{ color: 'white', paddingHorizontal: 30 * scale, paddingVertical: 15 * scale, fontSize: 16 * scale, fontWeight: 'bold' }}>Hoàn thành</Text>
                 </TouchableOpacity>
             </View>
