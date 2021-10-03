@@ -135,7 +135,7 @@ export default function App() {
     setLoading(true)
     callApi('v2/images:annotate', 'POST', body).then(res => {
       console.log('annotate', res);
-      if (res?.responses?.length === 2 && res?.responses[0].results[0]?.objects?.length === 6 && res?.responses[1].results[0]?.objects?.length === 3) {
+      if (res?.responses?.length === 2 && res?.responses[0].results[0]?.objects?.length === 6 && res?.responses[1].results[0]?.objects?.length >= 2) {
         setDataResponse({
           ...dataResponse,
           card_front: res?.responses[0].results[0]?.objects,
