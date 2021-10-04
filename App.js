@@ -215,7 +215,7 @@ export default function App() {
         "action": 'LEFT_POSE_HEAD'
       }]
     }
-    console.log('body', body);
+    // console.log('body', body);
     callApi('v2/images:liveness', 'POST', body).then(res => {
       console.log('liveness', res);
       // [{score: 1, isLive: true},{score: 1, isLive: true},{score: 1, isLive: true}]
