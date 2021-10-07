@@ -14,7 +14,7 @@ function CameraComponent({ isPlaying, cameraRef, setisPlaying, setTimer }) {
             size={260 * scale}
             // initialRemainingTime={0}
             onComplete={() => {
-                console.log('123');
+                console.log('cameraFinish');
                 setisPlaying(false)
                 // do your stuff here
                 return [true, 90000] // repeat animation in 1.5 seconds

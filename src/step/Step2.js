@@ -25,32 +25,33 @@ export default function Step2({ onNextStep2, setLoading }) {
             let i = timer
 
             if (i > 2 && i < 6) {
-                const images = await cameraRef?.current.capture()
-
+                // const images = await cameraRef?.current.capture()
+                const images = await Promise.all(Array.from(Array(4), () => cameraRef.current.capture()));
                 setData(prevState => {
-                    return { ...prevState, center: [...prevState.center, images.uri] }
+                    return { ...prevState, center: [...prevState.center, ...images] }
                 })
             }
             if (i > 8 && i < 12) {
-                const images = await cameraRef?.current.capture()
-
+                // const images = await cameraRef?.current.capture()
+                const images = await Promise.all(Array.from(Array(4), () => cameraRef.current.capture()));
                 setData(prevState => {
-                    return { ...prevState, left: [...prevState.left, images.uri] }
+                    return { ...prevState, left: [...prevState.left, ...images] }
                 })
             }
             if (i > 14 && i < 18) {
-                const images = await cameraRef?.current.capture()
-
+                // const images = await cameraRef?.current.capture()
+                const images = await Promise.all(Array.from(Array(4), () => cameraRef.current.capture()));
                 let dataLocal = {}
                 await setData(prevState => {
-                    dataLocal = { ...prevState, right: [...prevState.right, images.uri] }
-                    return { ...prevState, right: [...prevState.right, images.uri] }
+                    dataLocal = { ...prevState, right: [...prevState.right, ...images] }
+                    return { ...prevState, right: [...prevState.right, ...images] }
                 })
 
                 if (i === 17) {
                     setTimer(-1)
-                    setLoading(true)
                     onNextStep2(dataLocal)
+                    setLoading(true)
+
                 }
             }
         }

@@ -17,11 +17,11 @@ export default function Step4({ dataResponse, data, setActiveStep, clearData }) 
             <View style={{ flex: 1, marginTop: 35 * scale }}>
                 <View style={{ flexDirection: 'row', borderColor: 'white', borderBottomWidth: 1, paddingBottom: 10 }}>
                     <Text style={{ color: 'white', fontSize: 15 * scale, marginRight: 10 * scale, flex: 3 / 5 }}>KẾT QUẢ XÁC NHẬN KHUÔN MẶT</Text>
-                    <Text style={{ fontSize: 15 * scale, fontWeight: 'bold', color: dataResponse?.liveness?.responses?.filter(s => s.isLive == true)?.length === 3 ? 'green' : 'red', flex: 2 / 5 }}>{dataResponse?.liveness?.responses?.filter(s => s.isLive == true)?.length === 3 ? 'THÀNH CÔNG' : 'THẤT BẠI'}</Text>
+                    <Text style={{ fontSize: 15 * scale, fontWeight: 'bold', color: dataResponse?.verify?.responses[0]?.isMatch === true ? 'green' : 'red', flex: 2 / 5 }}>{dataResponse?.verify?.responses[0]?.isMatch === true ? 'THÀNH CÔNG' : 'THẤT BẠI'}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', borderColor: 'white', borderBottomWidth: 1, paddingBottom: 10 }}>
                     <Text style={{ color: 'white', fontSize: 15 * scale, marginRight: 10 * scale, flex: 3 / 5 }}>KẾT QUẢ XÁC NHẬN NGƯỜI THẬT</Text>
-                    <Text style={{ fontSize: 15 * scale, fontWeight: 'bold', color: dataResponse?.verify?.responses[0]?.isMatch === true ? 'green' : 'red', flex: 2 / 5 }}>{dataResponse?.verify?.responses[0]?.isMatch === true ? 'THÀNH CÔNG' : 'THẤT BẠI'}</Text>
+                    <Text style={{ fontSize: 15 * scale, fontWeight: 'bold', color: dataResponse?.liveness?.responses?.filter(s => s.isLive == true)?.length === 3 ? 'green' : 'red', flex: 2 / 5 }}>{dataResponse?.liveness?.responses?.filter(s => s.isLive == true)?.length === 3 ? 'THÀNH CÔNG' : 'THẤT BẠI'}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', borderColor: 'white', borderBottomWidth: 1, paddingBottom: 10 }}>
                     <Text style={{ color: 'white', fontSize: 15 * scale, marginRight: 10 * scale, flex: 3 / 5 }}>Họ tên</Text>

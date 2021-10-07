@@ -3,7 +3,6 @@ import axios from 'axios';
 
 
 export default callApi = async (endpoint, method = 'GET', body, header = '') => {
-  console.log('123');
   header = {
     "api-key": Config.API_KEY
   }

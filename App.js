@@ -96,7 +96,7 @@ export default function App() {
     modalizeRef.current?.close();
   };
 
-  const [activeStep, setActiveStep] = useState(0)
+  const [activeStep, setActiveStep] = useState(1)
 
 
   const changeUpload = (name) => {
@@ -159,72 +159,75 @@ export default function App() {
 
 
     for await (let [index, element] of data.center?.entries()) {
-      await read(element, "base64").then(contents => {
+      await read(element.uri, "base64").then(contents => {
         center[index] = contents
       });
     }
 
     for await (let [index, element] of data.left?.entries()) {
-      await read(element, "base64").then(contents => {
+      await read(element.uri, "base64").then(contents => {
         left[index] = contents
       });
     }
     for await (let [index, element] of data.right?.entries()) {
-      await read(element, "base64").then(contents => {
+      await read(element.uri, "base64").then(contents => {
         right[index] = contents
       });
     }
     var body = await {
       "requests": [{
-        "images": [{
-          "content": center[0]
-        },
-        {
-          "content": center[1]
-        },
-        {
-          "content": center[2]
-        }
-        ],
+        "images": Array.from([center], x => ({ 'content': x })),
+        // "images": [{
+        //   "content": center[0]
+        // },
+        // {
+        //   "content": center[1]
+        // },
+        // {
+        //   "content": center[2]
+        // }
+        // ],
         "action": 'FRONTAL_FACE'
       },
       {
-        "images": [{
-          "content": left[0]
-        },
-        {
-          "content": left[1]
-        },
-        {
-          "content": left[2]
-        }
-        ],
+        "images": Array.from([left], x => ({ 'content': x })),
+        // "images": [{
+        //   "content": left[0]
+        // },
+        // {
+        //   "content": left[1]
+        // },
+        // {
+        //   "content": left[2]
+        // }
+        // ],
         "action": 'RIGHT_POSE_HEAD'
       },
       {
-        "images": [{
-          "content": right[0]
-        },
-        {
-          "content": right[1]
-        },
-        {
-          "content": right[2]
-        }
-        ],
+        "images": Array.from([right], x => ({ 'content': x })),
+        // "images": [{
+        //   "content": right[0]
+        // },
+        // {
+        //   "content": right[1]
+        // },
+        // {
+        //   "content": right[2]
+        // }
+        // ],
         "action": 'LEFT_POSE_HEAD'
       }]
     }
-    // console.log('body', body);
-    callApi('v2/images:liveness', 'POST', body).then(res => {
+    console.log('body', body);
+
+    await callApi('v2/images:liveness', 'POST', body).then(res => {
       console.log('liveness', res);
       // [{score: 1, isLive: true},{score: 1, isLive: true},{score: 1, isLive: true}]
-      setDataResponse({ ...dataResponse, liveness: res })
+      // setDataResponse({ ...dataResponse, liveness: res })
       setLoading(false)
-      setActiveStep(2)
+      // setActiveStep(2)
     })
   }
-
   const onNextStep3 = async (image) => {
     await read(image, "base64").then(contents => {
       var body = {
@@ -250,7 +253,6 @@ export default function App() {
     });
   }
 
-  // console.log('dataResss', dataResponse);
 
 
   return (
