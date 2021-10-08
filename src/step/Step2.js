@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Dimensions, Image, Text, TouchableOpacity, View, Platform } from 'react-native';
 import CameraComponent from '../components/CameraComponent';
 var RNFS = require('react-native-fs');
+import ImageResizer from 'react-native-image-resizer';
 
 const { width, height } = Dimensions.get('window');
 const scale = width / 360
@@ -23,46 +24,60 @@ export default function Step2({ onNextStep2, setLoading }) {
         if (isPlaying) {
 
             let i = timer
+            if (i === 17) {
+                setLoading(true)
+            }
 
             if (i > 2 && i < 6) {
-                // const images = await cameraRef?.current.capture()
-                const images = await Promise.all(Array.from(Array(4), () => cameraRef.current.capture()));
+                let images = await Promise.all(Array.from(Array(4), () => cameraRef.current.capture()));
+                let images2 = await Promise.all(Array.from(images, x => resize(x.uri)))
                 setData(prevState => {
-                    return { ...prevState, center: [...prevState.center, ...images] }
+                    return { ...prevState, center: [...prevState.center, ...images2] }
                 })
             }
             if (i > 8 && i < 12) {
-                // const images = await cameraRef?.current.capture()
-                const images = await Promise.all(Array.from(Array(4), () => cameraRef.current.capture()));
+                let images = await Promise.all(Array.from(Array(4), () => cameraRef.current.capture()));
+                let images2 = await Promise.all(Array.from(images, x => resize(x.uri)))
                 setData(prevState => {
-                    return { ...prevState, left: [...prevState.left, ...images] }
+                    return { ...prevState, left: [...prevState.left, ...images2] }
                 })
             }
             if (i > 14 && i < 18) {
-                // const images = await cameraRef?.current.capture()
-                const images = await Promise.all(Array.from(Array(4), () => cameraRef.current.capture()));
+                let images = await Promise.all(Array.from(Array(4), () => cameraRef.current.capture()));
+                let images2 = await Promise.all(Array.from(images, x => resize(x.uri)))
+
                 let dataLocal = {}
                 await setData(prevState => {
-                    dataLocal = { ...prevState, right: [...prevState.right, ...images] }
-                    return { ...prevState, right: [...prevState.right, ...images] }
+                    dataLocal = { ...prevState, right: [...prevState.right, ...images2] }
+                    return { ...prevState, right: [...prevState.right, ...images2] }
                 })
 
                 if (i === 17) {
                     setTimer(-1)
                     onNextStep2(dataLocal)
-                    setLoading(true)
-
+                    // setLoading(true)
                 }
             }
         }
     }, [timer])
-
+    const resize = (pathName) => {
+        return ImageResizer.createResizedImage(pathName, 400, 400, 'JPEG', 70, 0, null)
+            .then(async (resizedImageUrl) => {
+                const base64 = await RNFS.readFile(resizedImageUrl.uri, 'base64');
+                return base64
+            })
+            .catch((err) => console.log('failed to resize: ' + err));
+    }
     const cameraRef = useRef(null)
     const takePicture = React.useCallback(async () => {
         setisPlaying(true)
         setData({
             left: [], center: [], right: []
         })
+        // const images = await Promise.all(Array.from(Array(4), () => cameraRef.current.capture()));
+        // const images2 = await Promise.all(Array.from(images, x => resize(x.path)))
+        // console.log('images2', images2);
+
     }, [valueCapture]);
 
 

@@ -17,7 +17,7 @@ function CameraComponent({ isPlaying, cameraRef, setisPlaying, setTimer }) {
                 console.log('cameraFinish');
                 setisPlaying(false)
                 // do your stuff here
-                return [true, 90000] // repeat animation in 1.5 seconds
+                // return [true, 90000] // repeat animation in 1.5 seconds
             }}
             colors={[
                 ['#004777', 0.4],
