@@ -10,13 +10,11 @@ function CameraComponent({ isPlaying, cameraRef, setisPlaying, setTimer }) {
     return (
         <CountdownCircleTimer
             isPlaying={isPlaying}
-            duration={17}
+            duration={19}
             size={260 * scale}
-            // initialRemainingTime={0}
             onComplete={() => {
                 console.log('cameraFinish');
                 setisPlaying(false)
-                // do your stuff here
                 // return [true, 90000] // repeat animation in 1.5 seconds
             }}
             colors={[
@@ -26,26 +24,21 @@ function CameraComponent({ isPlaying, cameraRef, setisPlaying, setTimer }) {
             ]}
         >
             {({ remainingTime, animatedColor }) => {
-                setTimer(17 - remainingTime)
+                setTimer(19 - remainingTime)
                 return (
                     <Animated.Text style={{ color: animatedColor, marginTop: 6 }}>
-
-                        {/* {remainingTime} */}
                         <View style={{
                             height: 240 * scale,
                             width: 240 * scale,
                             borderRadius: (240 * scale) / 2,
                             overflow: 'hidden',
-                            // paddingBottom: 100
-                            // flex: 1,
-                            // backgroundColor: 'red',
+
                         }}>
                             <Camera
                                 style={{
                                     height: 240 * scale,
                                     width: 240 * scale,
                                 }}
-
                                 flashMode="off" // on/off/auto(default)
                                 focusMode="on" // off/on(default)
                                 zoomMode="off" // off/on(default)
@@ -54,19 +47,16 @@ function CameraComponent({ isPlaying, cameraRef, setisPlaying, setTimer }) {
                                 ratioOverlayColor="#00000077" // optional
                                 // resetFocusTimeout={5000}
                                 resetFocusWhenMotionDetected={true}
-
                                 saveToCameraRollWithPhUrl={true}
                                 ref={cameraRef}
                                 saveToCameraRoll={false}
-                                saveToInternalStorage={true}
+                                saveToInternalStorage={true} // custom
                                 cameraType={CameraType.Front} // front/back(default)
                             />
                         </View>
                     </Animated.Text>
                 )
             }
-
-
             }
         </CountdownCircleTimer >
     )

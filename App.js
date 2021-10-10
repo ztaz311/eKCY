@@ -1,17 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react'
-import { Platform, Image, LogBox, View, Text, StyleSheet, Dimensions, TouchableOpacity, SafeAreaView, StatusBar, ActivityIndicator } from 'react-native'
-import { ProgressSteps, ProgressStep } from './src/components/react-native-progress-steps';
-// import { ProgressSteps, ProgressStep } from 'react-native-progress-steps';
-import Step1 from './src/step/Step1';
-import Step2 from './src/step/Step2';
-import Step3 from './src/step/Step3';
-import Step4 from './src/step/Step4';
+import React, { useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, Dimensions, Image, LogBox, Platform, SafeAreaView, StatusBar, Text, TouchableOpacity, View } from 'react-native';
+import { readFile as read } from "react-native-fs";
 import { Modalize } from 'react-native-modalize';
-import callApi from './src/services/HTTP';
+import { check, PERMISSIONS, request } from 'react-native-permissions';
 import Toast from 'react-native-simple-toast';
-import { readFile as read, writeFile as write } from "react-native-fs";
-import { request, check, PERMISSIONS, RESULTS } from 'react-native-permissions';
-import ImageResizer from 'react-native-image-resizer';
+import { ProgressStep, ProgressSteps } from './src/components/react-native-progress-steps';
+import callApi from './src/services/HTTP';
+import Step1 from './src/steps/Step1';
+import Step2 from './src/steps/Step2';
+import Step3 from './src/steps/Step3';
+import Step4 from './src/steps/Step4';
 
 const { width, height } = Dimensions.get('window');
 const scale = width / 360
@@ -30,7 +28,6 @@ const defaultScrollViewProps = {
   scrollEnabled: false
 };
 
-
 export default function App() {
 
   const requestPermission = (data) => {
@@ -45,7 +42,6 @@ export default function App() {
       });
     }
   }
-
   const checkPermission = () => {
     check(Platform.OS === 'android' ? PERMISSIONS.ANDROID.CAMERA : PERMISSIONS.IOS.CAMERA).then(res => {
       if (res === 'blocked') {
@@ -61,7 +57,6 @@ export default function App() {
   useEffect(() => {
     checkPermission()
   }, [])
-
 
   const modalizeRef = useRef(null);
   const [loading, setLoading] = useState(false)
@@ -81,14 +76,10 @@ export default function App() {
 
   const [dataResponse, setDataResponse] = useState({})
 
-
   const [upload, setUpload] = useState({
     camera: 0,
     file: 0
   })
-
-
-
 
   const onOpenModalize = () => {
     modalizeRef.current?.open();
@@ -108,6 +99,7 @@ export default function App() {
 
 
   const onNextStep1 = () => {
+
     var body = {
       "requests": [
         {
@@ -135,7 +127,7 @@ export default function App() {
 
     setLoading(true)
     callApi('v2/images:annotate', 'POST', body).then(res => {
-      console.log('annotate', res);
+      // console.log('annotate', res);
       if (res?.responses?.length === 2 && res?.responses[0].results[0]?.objects?.length === 6 && res?.responses[1].results[0]?.objects?.length >= 2) {
         setDataResponse({
           ...dataResponse,
@@ -153,78 +145,24 @@ export default function App() {
 
 
   const onNextStep2 = async (data) => {
-    // console.log('data', data);
-    // let center = []
-    // let left = []
-    // let right = []
-
-
-    // for await (let [index, element] of data.center?.entries()) {
-    //   await read(element.uri, "base64").then(contents => {
-    //     center[index] = contents
-    //   });
-    // }
-
-    // for await (let [index, element] of data.left?.entries()) {
-    //   await read(element.uri, "base64").then(contents => {
-    //     left[index] = contents
-    //   });
-    // }
-    // for await (let [index, element] of data.right?.entries()) {
-    //   await read(element.uri, "base64").then(contents => {
-    //     right[index] = contents
-    //   });
-    // }
     try {
-
-
       var body = await {
         "requests": [{
-          "images": Array.from(data.center.slice(0, -2), x => ({ 'content': x })),
-          // "images": [{
-          //   "content": center[0]
-          // },
-          // {
-          //   "content": center[1]
-          // },
-          // {
-          //   "content": center[2]
-          // }
-          // ],
+          "images": Array.from(data.center, x => ({ 'content': x })),//Array.from(data.center.slice(0, -2), x => ({ 'content': x })),
           "action": 'FRONTAL_FACE'
         },
         {
-          "images": Array.from(data.left.slice(0, -2), x => ({ 'content': x })),
-          // "images": [{
-          //   "content": left[0]
-          // },
-          // {
-          //   "content": left[1]
-          // },
-          // {
-          //   "content": left[2]
-          // }
-          // ],
+          "images": Array.from(data.left, x => ({ 'content': x })),
           "action": 'RIGHT_POSE_HEAD'
         },
         {
-          "images": Array.from(data.right.slice(0, -2), x => ({ 'content': x })),
-          // "images": [{
-          //   "content": right[0]
-          // },
-          // {
-          //   "content": right[1]
-          // },
-          // {
-          //   "content": right[2]
-          // }
-          // ],
+          "images": Array.from(data.right, x => ({ 'content': x })),
           "action": 'LEFT_POSE_HEAD'
         }]
       }
       console.log('body', body);
       await callApi('v2/images:liveness', 'POST', body).then(res => {
-        console.log('liveness', res);
+        console.log('liveness', res.responses);
         // [{score: 1, isLive: true},{score: 1, isLive: true},{score: 1, isLive: true}]
         setDataResponse({ ...dataResponse, liveness: res })
         setLoading(false)
@@ -232,7 +170,7 @@ export default function App() {
       })
 
     } catch (error) {
-      console.log('catch', error)
+      console.log('error', error)
     }
   }
   const onNextStep3 = async (image) => {
@@ -251,7 +189,7 @@ export default function App() {
 
       callApi('v2/images:verify', 'POST', body).then(res => {
         // [{isMatch: true, score: 0.6105406284332275}]
-        console.log('verify', res);
+        // console.log('verify', res);
         setLoading(false)
         setDataResponse({ ...dataResponse, verify: res })
         setActiveStep(3)
