@@ -7,6 +7,8 @@ const scale = width / 360
 export default function Step3({ onNextStep3, setLoading }) {
 
     const cameraRef = useRef(null)
+
+    // capture camera
     const takePicture = React.useCallback(async () => {
         setLoading(true)
         const images = await cameraRef?.current.capture()

@@ -9,6 +9,8 @@ export default function Step1({ onOpenModalize, upload, onCloseModalize, setUplo
 
     const [choose, setChoose] = useState('front')
 
+
+    // Open Camera
     const onUploadCamera = () => {
         ImagePicker.openCamera({
             width: 600,
@@ -24,6 +26,7 @@ export default function Step1({ onOpenModalize, upload, onCloseModalize, setUplo
         });
     }
 
+    // Open Open Library image
     const onUploadFile = () => {
         ImagePicker.openPicker({
             width: 700,

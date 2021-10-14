@@ -30,6 +30,9 @@ const defaultScrollViewProps = {
 
 export default function App() {
 
+
+
+  // Check permission camera
   const requestPermission = (data) => {
     if (data == 'denied') {
       request(Platform.OS === 'android' ? PERMISSIONS.ANDROID.CAMERA : PERMISSIONS.IOS.CAMERA).then((result) => {
@@ -98,8 +101,9 @@ export default function App() {
   }
 
 
-  const onNextStep1 = () => {
 
+  // Call Api CMND
+  const onNextStep1 = () => {
     var body = {
       "requests": [
         {
@@ -127,7 +131,6 @@ export default function App() {
 
     setLoading(true)
     callApi('v2/images:annotate', 'POST', body).then(res => {
-      // console.log('annotate', res);
       if (res?.responses?.length === 2 && res?.responses[0].results[0]?.objects?.length === 6 && res?.responses[1].results[0]?.objects?.length >= 2) {
         setDataResponse({
           ...dataResponse,
@@ -143,7 +146,7 @@ export default function App() {
   };
 
 
-
+  // Call Api Liveness
   const onNextStep2 = async (data) => {
     try {
       var body = await {
@@ -173,6 +176,9 @@ export default function App() {
       console.log('error', error)
     }
   }
+
+
+  // Call Api check face
   const onNextStep3 = async (image) => {
     await read(image, "base64").then(contents => {
       var body = {

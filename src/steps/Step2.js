@@ -21,6 +21,8 @@ export default function Step2({ onNextStep2, setLoading }) {
     }, [])
 
 
+
+    // capturing camera
     useEffect(async () => {
         if (isPlaying) {
             let i = timer
@@ -55,6 +57,9 @@ export default function Step2({ onNextStep2, setLoading }) {
         }
     }, [timer])
 
+
+
+    // check data capture and call api
     useEffect(() => {
         if (Array.isArray(data?.right) && data?.right.length === 10) {
             setLoading(true)
@@ -78,13 +83,20 @@ export default function Step2({ onNextStep2, setLoading }) {
 
     }
     const cameraRef = useRef(null)
+
+
+    //  begin capture camera
     const takePicture = React.useCallback(async () => {
         setisPlaying(true)
-        setData({
-            left: [], center: [], right: []
-        })
+        // setData({
+        //     left: [], center: [], right: []
+        // })
     }, [valueCapture]);
 
+
+
+
+    // render icon liveness
     const getLogo = () => {
         if (timer < 6) {
             return <Image source={require('../assets/face-center.png')} style={{ width: 70 * scale, height: 70 * scale, alignSelf: 'center', marginTop: -5 }} resizeMode="contain" />
@@ -97,6 +109,9 @@ export default function Step2({ onNextStep2, setLoading }) {
         }
     }
 
+
+
+    // render description
     const getDes = () => {
         if (timer < 3) {
             let i = timer === 0 ? 3 : timer === 1 ? 2 : 1
