@@ -68,6 +68,8 @@ export default function Step2({ onNextStep2, setLoading }) {
     }, [data])
 
 
+
+    // crop , resize image and convert base64 
     const resize = async (pathName) => {
         return ImageResizer.createResizedImage(pathName, 500, 500, 'JPEG', 100, 0, null)
             .then(async (resizedImageUrl) => {
