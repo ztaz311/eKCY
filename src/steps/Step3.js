@@ -1,10 +1,11 @@
 import React, { useRef } from 'react';
 import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
 import { Camera, CameraType } from 'react-native-camera-kit';
+import convertLanguage from '../languages'
 
 const { width, height } = Dimensions.get('window');
 const scale = width / 360
-export default function Step3({ onNextStep3, setLoading }) {
+export default function Step3({ onNextStep3, setLoading, language }) {
 
     const cameraRef = useRef(null)
 
@@ -47,7 +48,7 @@ export default function Step3({ onNextStep3, setLoading }) {
                 />
             </View>
             <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginTop: 30 * scale }}>
-                Căn chỉnh khuôn mặt vào khung
+                {convertLanguage(language, 'face_center')}
             </Text>
             <TouchableOpacity
                 onPress={takePicture} style={{

@@ -4,10 +4,11 @@ import CameraComponent from '../components/CameraComponent';
 var RNFS = require('react-native-fs');
 import ImageResizer from 'react-native-image-resizer';
 import ImageEditor from "@react-native-community/image-editor";
+import convertLanguage from '../languages'
 
 const { width, height } = Dimensions.get('window');
 const scale = width / 360
-export default function Step2({ onNextStep2, setLoading }) {
+export default function Step2({ onNextStep2, setLoading, language }) {
     const [isPlaying, setisPlaying] = useState(false)
     const [timer, setTimer] = useState(-1)
     const [data, setData] = useState({
@@ -29,6 +30,7 @@ export default function Step2({ onNextStep2, setLoading }) {
             if (i > 2 && i < 5) {
                 let images = await Promise.all(Array.from(Array(5), () => cameraRef.current.capture()));
                 let images2 = await Promise.all(Array.from(images, x => resize(x.uri)))
+                // console.log(i, images2);
                 setData(prevState => {
                     return { ...prevState, center: [...prevState.center, ...images2] }
                 })
@@ -37,6 +39,7 @@ export default function Step2({ onNextStep2, setLoading }) {
             if (i > 8 && i < 11) {
                 let images = await Promise.all(Array.from(Array(5), () => cameraRef.current.capture()));
                 let images2 = await Promise.all(Array.from(images, x => resize(x.uri)))
+                // console.log(i, images2);
                 setData(prevState => {
                     return { ...prevState, left: [...prevState.left, ...images2] }
                 })
@@ -44,6 +47,7 @@ export default function Step2({ onNextStep2, setLoading }) {
             if (i > 14 && i < 17) {
                 let images = await Promise.all(Array.from(Array(5), () => cameraRef.current.capture()));
                 let images2 = await Promise.all(Array.from(images, x => resize(x.uri)))
+                // console.log(i, images2);
                 await setData(prevState => {
                     return { ...prevState, right: [...prevState.right, ...images2] }
                 })
@@ -111,7 +115,7 @@ export default function Step2({ onNextStep2, setLoading }) {
         }
     }
 
-
+    const returnTextSecons = (i) => convertLanguage(language, 'recording', { i })
 
     // render description
     const getDes = () => {
@@ -119,9 +123,9 @@ export default function Step2({ onNextStep2, setLoading }) {
             let i = timer === 0 ? 3 : timer === 1 ? 2 : 1
             return (
                 <>
-                    <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, textAlign: 'center' }}>Nhìn thẳng</Text>
+                    <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, textAlign: 'center' }}>{convertLanguage(language, 'look')}</Text>
                     <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>
-                        Bắt đầu thu hình sau {i} giây
+                        {returnTextSecons(i)}
                     </Text>
                 </>
             )
@@ -129,41 +133,39 @@ export default function Step2({ onNextStep2, setLoading }) {
         } else if (timer === 6 || timer === 7 || timer === 8) {
             let i = timer === 6 ? 3 : timer === 7 ? 2 : 1
             return <>
-                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, textAlign: 'center' }}>Quay sang trái</Text>
+                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, textAlign: 'center' }}>{convertLanguage(language, 'turn_left')}</Text>
                 <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>
-                    Bắt đầu thu hình sau {i} giây
+                    {returnTextSecons(i)}
                 </Text>
             </>
 
         } else if (timer === 12 || timer === 13 || timer === 14) {
             let i = timer === 12 ? 3 : timer === 13 ? 2 : 1
             return <>
-                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, textAlign: 'center' }}>Quay sang phải</Text>
+                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, textAlign: 'center' }}>{convertLanguage(language, 'turn_right')}</Text>
                 <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>
-                    Bắt đầu thu hình sau {i} giây
+                    {returnTextSecons(i)}
                 </Text>
             </>
 
         } else if (timer === 3 || timer === 4 || timer === 5) {
             return <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>
-                Nhìn thẳng
+                {convertLanguage(language, 'look')}
             </Text>
 
         } else if (timer === 9 || timer === 10 || timer === 11) {
             return <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>
-                Quay sang trái
+                {convertLanguage(language, 'turn_left')}
             </Text>
 
         } else if (timer === 15 || timer === 16 || timer === 17 || timer === 18) {
             return <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>
-                Quay sang phải
+                {convertLanguage(language, 'turn_right')}
             </Text>
 
         }
         else {
-            return <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>Căn chỉnh khuyân mặt vào khung</Text>
-
-
+            return <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>{convertLanguage(language, 'face_center')}</Text>
         }
     }
 
@@ -179,7 +181,7 @@ export default function Step2({ onNextStep2, setLoading }) {
                         :
                         <>
                             <Image source={require('../assets/face-begin.png')} style={{ width: 45 * scale, height: 45 * scale, alignSelf: 'center' }} resizeMode="contain" />
-                            <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>Căn chỉnh khuôn mặt vào khung</Text>
+                            <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>{convertLanguage(language, 'face_center')}</Text>
                         </>
                 }
             </View>

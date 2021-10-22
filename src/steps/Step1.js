@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Dimensions, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
-
+import convertLanguage from '../languages'
 const { width, height } = Dimensions.get('window');
 const scale = width / 360
 
-export default function Step1({ onOpenModalize, upload, onCloseModalize, setUpload, data, setData }) {
-
+export default function Step1({ onOpenModalize, upload, onCloseModalize, setUpload, data, setData, language }) {
     const [choose, setChoose] = useState('front')
 
 
@@ -29,7 +28,7 @@ export default function Step1({ onOpenModalize, upload, onCloseModalize, setUplo
     // Open Open Library image
     const onUploadFile = () => {
         ImagePicker.openPicker({
-            width: 700,
+            width: 600,
             height: 400,
             cropping: true,
             mediaType: 'photo',
@@ -61,14 +60,14 @@ export default function Step1({ onOpenModalize, upload, onCloseModalize, setUplo
 
     return (
         <View>
-            <Text style={styles.txtLabel}>Ảnh hộ chiếu/ CMND:</Text>
-            <Text style={styles.txtChoose}>Mặt trước</Text>
+            {/* <Text style={styles.txtLabel}>Ảnh hộ chiếu/ CMND:</Text> */}
+            <Text style={styles.txtChoose}>{convertLanguage(language, 'font')}</Text>
             {
                 data.card_front === '' ?
                     <TouchableOpacity style={styles.boxUpload} onPress={() => { onOpenModalize(), setChoose('front') }}>
                         <View style={styles.boxPick}>
                             <Image source={require('../assets/PhotoAdd2.png')} style={styles.imgUpload} resizeMode="contain" />
-                            <Text style={styles.txtPickImage}>Tải ảnh lên</Text>
+                            <Text style={styles.txtPickImage}>{convertLanguage(language, 'upload_image')}</Text>
                         </View>
                     </TouchableOpacity>
                     :
@@ -78,17 +77,17 @@ export default function Step1({ onOpenModalize, upload, onCloseModalize, setUplo
                             onPress={() => { onOpenModalize(), setChoose('front') }}
                         >
                             <Image style={styles.ic_camera} source={require('../assets/camera2.png')} />
-                            <Text style={styles.txtUpdateImage}>Sửa ảnh</Text>
+                            <Text style={styles.txtUpdateImage}>{convertLanguage(language, 'edit_image')}</Text>
                         </TouchableOpacity>
                     </View>
             }
-            <Text style={[styles.txtChoose, { marginTop: 20 * scale }]}>Mặt sau</Text>
+            <Text style={[styles.txtChoose, { marginTop: 20 * scale }]}>{convertLanguage(language, 'back')}</Text>
             {
                 data.card_back === '' ?
                     <TouchableOpacity style={styles.boxUpload} onPress={() => { onOpenModalize(), setChoose('back') }}>
                         <View style={styles.boxPick}>
                             <Image source={require('../assets/PhotoAdd2.png')} style={styles.imgUpload} resizeMode="contain" />
-                            <Text style={styles.txtPickImage}>Tải ảnh lên</Text>
+                            <Text style={styles.txtPickImage}>{convertLanguage(language, 'upload_image')}</Text>
                         </View>
                     </TouchableOpacity>
                     :
@@ -111,8 +110,8 @@ const styles = StyleSheet.create({
         color: 'white'
     },
     imgPick: {
-        width: 328 * scale,
-        height: 182 * scale,
+        width: 295 * scale,
+        height: 165 * scale,
         borderRadius: 16
     },
     boxPick: {
@@ -132,19 +131,20 @@ const styles = StyleSheet.create({
     boxUpload: {
         borderColor: 'white',
         borderRadius: 16,
-        width: 328 * scale,
-        height: 182 * scale,
+        width: 295 * scale,
+        height: 165 * scale,
         borderWidth: 2,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        alignSelf: 'center'
     },
     txtUpload: {
         color: 'white',
         fontWeight: 'bold'
     },
     imgUpload: {
-        width: 48 * scale,
-        height: 48 * scale,
+        width: 28 * scale,
+        height: 28 * scale,
         tintColor: 'white'
     },
     handleStyle: {
@@ -165,8 +165,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     ic_camera: {
-        width: 16,
-        height: 16,
+        width: 16 * scale,
+        height: 16 * scale,
         marginRight: 4,
     },
     txtUpdateImage: {

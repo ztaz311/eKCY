@@ -18,6 +18,7 @@
     "react-native-countdown-circle-timer": "^2.5.4",
     "react-native-fs": "^2.18.0",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-i18n": "^2.0.15",
     "react-native-image-crop-picker": "^0.36.3",
     "react-native-image-resizer": "^1.4.5",
     "react-native-modalize": "^2.0.8",
