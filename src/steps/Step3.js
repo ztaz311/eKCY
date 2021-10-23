@@ -2,18 +2,35 @@ import React, { useRef } from 'react';
 import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
 import { Camera, CameraType } from 'react-native-camera-kit';
 import convertLanguage from '../languages'
-
+import ImageResizer from 'react-native-image-resizer';
+import ImageEditor from "@react-native-community/image-editor";
 const { width, height } = Dimensions.get('window');
 const scale = width / 360
+var RNFS = require('react-native-fs');
+
 export default function Step3({ onNextStep3, setLoading, language }) {
 
     const cameraRef = useRef(null)
 
+    const resize = async (pathName) => {
+        return ImageResizer.createResizedImage(pathName, 500, 500, 'JPEG', 100, 0, null)
+            .then(async (resizedImageUrl) => {
+                return ImageEditor.cropImage(resizedImageUrl.uri, {
+                    offset: { x: 0, y: 60 },
+                    size: { width: resizedImageUrl.width, height: resizedImageUrl.width + 80 }
+                }).then(async url => {
+                    const base64 = await RNFS.readFile(url, 'base64');
+                    return base64
+                })
+            })
+            .catch((err) => console.log('failed to resize: ' + err));
+
+    }
     // capture camera
     const takePicture = React.useCallback(async () => {
         setLoading(true)
         const images = await cameraRef?.current.capture()
-        onNextStep3(images.uri)
+        onNextStep3(await resize(images.uri))
     }, []);
 
     return (

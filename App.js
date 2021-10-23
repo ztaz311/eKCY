@@ -183,32 +183,32 @@ export default function App() {
 
   // Call Api check face
   const onNextStep3 = async (image) => {
-    await read(image, "base64").then(contents => {
-      var body = {
-        "requests": [{
-          "images": [{
-            "content": data.card_front
-          },
-          {
-            "content": contents
-          }
-          ]
-        }]
-      }
 
-      callApi('v2/images:verify', 'POST', body).then(res => {
-        // [{isMatch: true, score: 0.6105406284332275}]
-        // console.log('verify', res);
-        setLoading(false)
-        setDataResponse({ ...dataResponse, verify: res })
-        setActiveStep(3)
-        setData({ ...data, image })
-      })
-    });
+
+    // await read(image, "base64").then(contents => {
+    var body = {
+      "requests": [{
+        "images": [{
+          "content": data.card_front
+        },
+        {
+          "content": image
+        }
+        ]
+      }]
+    }
+
+    callApi('v2/images:verify', 'POST', body).then(res => {
+      // [{isMatch: true, score: 0.6105406284332275}]
+      // console.log('verify', res);
+      setLoading(false)
+      setDataResponse({ ...dataResponse, verify: res })
+      setActiveStep(3)
+      setData({ ...data, image })
+    })
+    // });
   }
 
-
-  console.log('lan', language);
   return (
     <>
       <SafeAreaView style={{ flex: 1, backgroundColor: 'black' }} >

@@ -14,7 +14,7 @@ export default function Step4({ dataResponse, data, setActiveStep, clearData, la
                     <Image source={{ uri: `data:image/jpeg;base64,${data.card_front}` }} style={{ width: 120 * scale, height: 70 * scale, marginRight: 5 * scale }} resizeMode="contain" />
                     <Image source={{ uri: `data:image/jpeg;base64,${data.card_back}` }} style={{ width: 120 * scale, height: 70 * scale }} resizeMode="contain" />
                 </View>
-                <Image source={{ uri: `${data.image}` }} style={{ width: 85 * scale, height: 85 * scale, borderRadius: 50 }} />
+                <Image source={{ uri: `data:image/jpeg;base64,${data.image}` }} style={{ width: 85 * scale, height: 85 * scale, borderRadius: 50 }} />
             </View>
             <View style={{ flex: 1, marginTop: 35 * scale }}>
                 <View style={{ flexDirection: 'row', borderColor: 'white', borderBottomWidth: 1, paddingBottom: 10 * scale * scale }}>

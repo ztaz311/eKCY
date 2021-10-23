@@ -12,7 +12,7 @@ export default function Step1({ onOpenModalize, upload, onCloseModalize, setUplo
     // Open Camera
     const onUploadCamera = () => {
         ImagePicker.openCamera({
-            width: 600,
+            width: 700,
             height: 400,
             includeBase64: true,
             cropping: true,
@@ -28,7 +28,7 @@ export default function Step1({ onOpenModalize, upload, onCloseModalize, setUplo
     // Open Open Library image
     const onUploadFile = () => {
         ImagePicker.openPicker({
-            width: 600,
+            width: 700,
             height: 400,
             cropping: true,
             mediaType: 'photo',
