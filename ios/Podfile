@@ -3,7 +3,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '11.0'
 
-target 'eKCY' do
+target 'eKYC' do
   config = use_native_modules!
   permissions_path = '../node_modules/react-native-permissions/ios'
   pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
@@ -14,7 +14,7 @@ target 'eKCY' do
     :hermes_enabled => false
   )
 
-  target 'eKCYTests' do
+  target 'eKYCTests' do
     inherit! :complete
     # Pods for testing
   end
