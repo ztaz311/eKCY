@@ -93,7 +93,7 @@ export default function App() {
     modalizeRef.current?.close();
   };
 
-  const [activeStep, setActiveStep] = useState(0)
+  const [activeStep, setActiveStep] = useState(1)
 
 
   const changeUpload = (name) => {
@@ -152,27 +152,44 @@ export default function App() {
   // Call Api Liveness
   const onNextStep2 = async (data) => {
     try {
-      var body = await {
-        "requests": [{
-          "images": Array.from(data.center, x => ({ 'content': x })),//Array.from(data.center.slice(0, -2), x => ({ 'content': x })),
-          "action": 'FRONTAL_FACE'
-        },
-        {
-          "images": Array.from(data.left, x => ({ 'content': x })),
-          "action": 'RIGHT_POSE_HEAD'
-        },
-        {
-          "images": Array.from(data.right, x => ({ 'content': x })),
-          "action": 'LEFT_POSE_HEAD'
-        }]
+
+      const changePos = (action) => {
+        switch (action) {
+          case 'RIGHT_POSE_HEAD':
+            return 'LEFT_POSE_HEAD'
+          case 'LEFT_POSE_HEAD':
+            return 'RIGHT_POSE_HEAD'
+          case 'CLOSE_LEFT_EYSE':
+            return 'CLOSE_RIGHT_EYSE'
+          case 'CLOSE_LEFT_EYSE':
+            return 'CLOSE_RIGHT_EYSE'
+
+          default:
+            return action
+        }
       }
+
+      let requests = []
+      for await (const [key, value] of Object.entries(data)) {
+        requests.push({
+          images: data[key],
+          action: changePos(key)
+        })
+      }
+
+      let body = await { requests }
+
       console.log('body', body);
       await callApi('v2/images:liveness', 'POST', body).then(res => {
         console.log('liveness', res.responses);
         // [{score: 1, isLive: true},{score: 1, isLive: true},{score: 1, isLive: true}]
+        // if (res.responses !== undefined) {
         setDataResponse({ ...dataResponse, liveness: res })
         setLoading(false)
         setActiveStep(2)
+        // }ele{
+        // Toast.showWithGravity('Bạn phải cấp quyền thiết bị!', Toast.LONG, Toast.CENTER)
+        // }
       })
 
     } catch (error) {

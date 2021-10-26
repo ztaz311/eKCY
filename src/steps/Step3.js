@@ -65,7 +65,7 @@ export default function Step3({ onNextStep3, setLoading, language }) {
                 />
             </View>
             <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginTop: 30 * scale }}>
-                {convertLanguage(language, 'face_center')}
+                {convertLanguage(language, 'face_begin')}
             </Text>
             <TouchableOpacity
                 onPress={takePicture} style={{

@@ -6,11 +6,12 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 const { width, height } = Dimensions.get('window');
 const scale = width / 360
 
-function CameraComponent({ isPlaying, cameraRef, setisPlaying, setTimer }) {
+function CameraComponent({ isPlaying, cameraRef, setisPlaying, setTimer, playing }) {
+    // console.log('123', playing);
     return (
         <CountdownCircleTimer
             isPlaying={isPlaying}
-            duration={19}
+            duration={playing}
             size={260 * scale}
             onComplete={() => {
                 console.log('cameraFinish');
@@ -24,7 +25,7 @@ function CameraComponent({ isPlaying, cameraRef, setisPlaying, setTimer }) {
             ]}
         >
             {({ remainingTime, animatedColor }) => {
-                setTimer(19 - remainingTime)
+                setTimer(playing - remainingTime)
                 return (
                     <Animated.Text style={{ color: animatedColor, marginTop: 6 }}>
                         <View style={{

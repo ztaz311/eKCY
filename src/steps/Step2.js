@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Dimensions, Image, Text, TouchableOpacity, View, Platform } from 'react-native';
 import CameraComponent from '../components/CameraComponent';
 var RNFS = require('react-native-fs');
@@ -6,23 +6,44 @@ import ImageResizer from 'react-native-image-resizer';
 import ImageEditor from "@react-native-community/image-editor";
 import convertLanguage from '../languages'
 
+
+const group1 = ['LEFT_POSE_HEAD', 'RIGHT_POSE_HEAD', 'FRONTAL_FACE']
+const group2 = ['CLOSE_LEFT_EYSE', 'CLOSE_RIGHT_EYSE', 'FRONTAL_FACE']
+const group3 = ['SMILE_TRANSITION', 'FRONTAL_FACE']
+
 const { width, height } = Dimensions.get('window');
 const scale = width / 360
 export default function Step2({ onNextStep2, setLoading, language }) {
     const [isPlaying, setisPlaying] = useState(false)
     const [timer, setTimer] = useState(-1)
-    const [data, setData] = useState({
-        left: [],
-        center: [],
-        right: []
-    })
+    // const [data, setData] = useState({
+    //     left: [],
+    //     center: [],
+    //     right: [],
+
+    //     LEFT_POSE_HEAD: [],
+    //     RIGHT_POSE_HEAD: [],
+    //     FRONTAL_FACE: [],
+    //     CLOSE_LEFT_EYSE: [],
+    //     CLOSE_RIGHT_EYSE: [],
+    //     SMILE_TRANSITION: [],
+    // })
+    const [data, setData] = useState({})
+    const [action, setAction] = useState([])
     const [valueCapture] = useState(0)
+
+
     useEffect(() => {
+        let group = get_random([group1, group2, group3])
+        let randomAction = group.sort(() => (Math.random() > .5) ? 1 : -1)
+        setAction(randomAction)
         return () => setisPlaying(false)
     }, [])
 
-
-
+    function get_random(list) {
+        return list[Math.floor((Math.random() * list.length))];
+    }
+    console.log('action', action);
     // capturing camera
     useEffect(async () => {
         if (isPlaying) {
@@ -32,7 +53,11 @@ export default function Step2({ onNextStep2, setLoading, language }) {
                 let images2 = await Promise.all(Array.from(images, x => resize(x.uri)))
                 // console.log(i, images2);
                 setData(prevState => {
-                    return { ...prevState, center: [...prevState.center, ...images2] }
+                    if (prevState[action[0]] === undefined) {
+                        return { ...prevState, [action[0]]: [...images2] }
+                    } else {
+                        return { ...prevState, [action[0]]: [...prevState[action[0]], ...images2] }
+                    }
                 })
             }
 
@@ -40,34 +65,52 @@ export default function Step2({ onNextStep2, setLoading, language }) {
                 let images = await Promise.all(Array.from(Array(5), () => cameraRef.current.capture()));
                 let images2 = await Promise.all(Array.from(images, x => resize(x.uri)))
                 // console.log(i, images2);
+                // setData(prevState => {
+                //     return { ...prevState, [action[1]]: [...prevState[action[1]], ...images2] }
+                // })
                 setData(prevState => {
-                    return { ...prevState, left: [...prevState.left, ...images2] }
+                    if (prevState[action[1]] === undefined) {
+                        return { ...prevState, [action[1]]: [...images2] }
+                    } else {
+                        return { ...prevState, [action[1]]: [...prevState[action[1]], ...images2] }
+                    }
                 })
             }
             if (i > 14 && i < 17) {
                 let images = await Promise.all(Array.from(Array(5), () => cameraRef.current.capture()));
                 let images2 = await Promise.all(Array.from(images, x => resize(x.uri)))
                 // console.log(i, images2);
+                // await setData(prevState => {
+                //     return { ...prevState, [action[2]]: [...prevState[action[2]], ...images2] }
+                // })
                 await setData(prevState => {
-                    return { ...prevState, right: [...prevState.right, ...images2] }
+                    if (prevState[action[2]] === undefined) {
+                        return { ...prevState, [action[2]]: [...images2] }
+                    } else {
+                        return { ...prevState, [action[2]]: [...prevState[action[2]], ...images2] }
+                    }
                 })
             }
-            if (i === 19) {
-                setLoading(true)
-                // setTimer(-1)
-                // onNextStep2(data)
-                // console.log('data', data);
-            }
+            // if (i === 19) {
+            //     setLoading(true)
+            //     // setTimer(-1)
+            //     // onNextStep2(data)
+            //     // console.log('data', data);
+            // }
         }
     }, [timer])
 
 
-
     // check data capture and call api
     useEffect(() => {
-        if (Array.isArray(data?.right) && data?.right.length === 10) {
+        // if (Array.isArray(data?.right) && data?.right.length === 10) {
+        //     setLoading(true)
+        //     onNextStep2(data)
+        // }
+        if (Array.isArray(data[action[action.length - 1]]) && data[action[action.length - 1]].length === 10) {
             setLoading(true)
             onNextStep2(data)
+            // console.log('data', data);
         }
     }, [data])
 
@@ -82,7 +125,7 @@ export default function Step2({ onNextStep2, setLoading, language }) {
                     size: { width: resizedImageUrl.width, height: resizedImageUrl.width + 80 }
                 }).then(async url => {
                     const base64 = await RNFS.readFile(url, 'base64');
-                    return base64
+                    return { content: base64 }
                 })
             })
             .catch((err) => console.log('failed to resize: ' + err));
@@ -104,14 +147,35 @@ export default function Step2({ onNextStep2, setLoading, language }) {
 
     // render icon liveness
     const getLogo = () => {
-        if (timer < 6) {
-            return <Image source={require('../assets/face-center.png')} style={{ width: 70 * scale, height: 70 * scale, alignSelf: 'center', marginTop: -5 }} resizeMode="contain" />
-        } else if (timer > 5 && timer < 12) {
-            return <Image source={require('../assets/face-left.png')} style={{ width: 55 * scale, height: 45 * scale, alignSelf: 'center' }} resizeMode="contain" />
-        } else if (timer > 11 && timer < 19) {
-            return <Image source={require('../assets/face-right.png')} style={{ width: 55 * scale, height: 45 * scale, alignSelf: 'center' }} resizeMode="contain" />
-        } else {
-            return <Image source={require('../assets/face-begin.png')} style={{ width: 45 * scale, height: 45 * scale, alignSelf: 'center' }} resizeMode="contain" />
+        if (action.length > 0) {
+            const getIcon = (value) => {
+                switch (value) {
+                    case 'LEFT_POSE_HEAD':
+                        return require(`../assets/LEFT_POSE_HEAD.png`)
+                    case 'RIGHT_POSE_HEAD':
+                        return require(`../assets/RIGHT_POSE_HEAD.png`)
+                    case 'FRONTAL_FACE':
+                        return require(`../assets/FRONTAL_FACE.png`)
+                    case 'CLOSE_LEFT_EYSE':
+                        return require(`../assets/CLOSE_LEFT_EYSE.png`)
+                    case 'CLOSE_RIGHT_EYSE':
+                        return require(`../assets/CLOSE_RIGHT_EYSE.png`)
+                    case 'SMILE_TRANSITION':
+                        return require(`../assets/SMILE_TRANSITION.png`)
+                    default:
+                        return require(`../assets/face-begin.png`)
+                }
+            }
+
+            if (timer < 6) {
+                return <Image source={getIcon(action[0])} style={{ width: 45 * scale, height: 45 * scale, alignSelf: 'center', marginTop: -5 }} resizeMode="contain" />
+            } else if (timer > 5 && timer < 12) {
+                return <Image source={getIcon(action[1])} style={{ width: 45 * scale, height: 45 * scale, alignSelf: 'center' }} resizeMode="contain" />
+            } else if (timer > 11 && timer < 19) {
+                return <Image source={getIcon(action[2])} style={{ width: 45 * scale, height: 45 * scale, alignSelf: 'center' }} resizeMode="contain" />
+            } else {
+                return <Image source={require(`../assets/face-begin.png`)} style={{ width: 45 * scale, height: 45 * scale, alignSelf: 'center' }} resizeMode="contain" />
+            }
         }
     }
 
@@ -123,8 +187,11 @@ export default function Step2({ onNextStep2, setLoading, language }) {
             let i = timer === 0 ? 3 : timer === 1 ? 2 : 1
             return (
                 <>
-                    <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, textAlign: 'center' }}>{convertLanguage(language, 'look')}</Text>
-                    <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>
+                    <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, textAlign: 'center' }}>
+                        {/* {convertLanguage(language, 'FRONTAL_FACE')} */}
+                        {convertLanguage(language, action[0])}
+                    </Text>
+                    <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale, textAlign: 'center' }}>
                         {returnTextSecons(i)}
                     </Text>
                 </>
@@ -133,8 +200,11 @@ export default function Step2({ onNextStep2, setLoading, language }) {
         } else if (timer === 6 || timer === 7 || timer === 8) {
             let i = timer === 6 ? 3 : timer === 7 ? 2 : 1
             return <>
-                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, textAlign: 'center' }}>{convertLanguage(language, 'turn_left')}</Text>
-                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>
+                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, textAlign: 'center' }}>
+                    {/* {convertLanguage(language, 'LEFT_POSE_HEAD')} */}
+                    {convertLanguage(language, action[1])}
+                </Text>
+                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale, textAlign: 'center' }}>
                     {returnTextSecons(i)}
                 </Text>
             </>
@@ -142,33 +212,40 @@ export default function Step2({ onNextStep2, setLoading, language }) {
         } else if (timer === 12 || timer === 13 || timer === 14) {
             let i = timer === 12 ? 3 : timer === 13 ? 2 : 1
             return <>
-                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, textAlign: 'center' }}>{convertLanguage(language, 'turn_right')}</Text>
-                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>
+                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, textAlign: 'center' }}>
+                    {/* {convertLanguage(language, 'RIGHT_POSE_HEAD')} */}
+                    {convertLanguage(language, action[2])}
+                </Text>
+                <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale, textAlign: 'center' }}>
                     {returnTextSecons(i)}
                 </Text>
             </>
 
         } else if (timer === 3 || timer === 4 || timer === 5) {
-            return <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>
-                {convertLanguage(language, 'look')}
+            return <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale, textAlign: 'center' }}>
+                {/* {convertLanguage(language, 'FRONTAL_FACE')} */}
+                {convertLanguage(language, action[0])}
             </Text>
 
         } else if (timer === 9 || timer === 10 || timer === 11) {
-            return <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>
-                {convertLanguage(language, 'turn_left')}
+            return <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale, textAlign: 'center' }}>
+                {/* {convertLanguage(language, 'LEFT_POSE_HEAD')} */}
+                {convertLanguage(language, action[1])}
             </Text>
 
         } else if (timer === 15 || timer === 16 || timer === 17 || timer === 18) {
-            return <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>
-                {convertLanguage(language, 'turn_right')}
+            return <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale, textAlign: 'center' }}>
+                {/* {convertLanguage(language, 'RIGHT_POSE_HEAD')} */}
+                {convertLanguage(language, action[2])}
             </Text>
 
         }
         else {
-            return <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>{convertLanguage(language, 'face_center')}</Text>
+            return <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale, textAlign: 'center' }}>
+                {convertLanguage(language, 'face_begin')}
+            </Text>
         }
     }
-
     const renderDes = () => {
         return (
             <View style={{ marginTop: 25 * scale, height: 50 * scale }}>
@@ -181,12 +258,25 @@ export default function Step2({ onNextStep2, setLoading, language }) {
                         :
                         <>
                             <Image source={require('../assets/face-begin.png')} style={{ width: 45 * scale, height: 45 * scale, alignSelf: 'center' }} resizeMode="contain" />
-                            <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>{convertLanguage(language, 'face_center')}</Text>
+                            {/* <Image source={require('../assets/left-eye.png')} style={{ width: 45 * scale, height: 45 * scale, alignSelf: 'center' }} resizeMode="contain" />
+                            <Image source={require('../assets/right-eye.png')} style={{ width: 45 * scale, height: 45 * scale, alignSelf: 'center' }} resizeMode="contain" />
+                            <Image source={require('../assets/smile1.png')} style={{ width: 45 * scale, height: 45 * scale, alignSelf: 'center' }} resizeMode="contain" /> */}
+                            <Text style={{ color: 'white', fontSize: 15, fontWeight: 'bold', lineHeight: 20 * scale, marginVertical: 10 * scale }}>
+                                {convertLanguage(language, 'face_begin')}
+                            </Text>
                         </>
                 }
             </View>
         )
     }
+
+    const _renderCamera = useCallback(() => {
+        if (action.length > 0)
+            return (
+                <CameraComponent playing={action.length === 3 ? 19 : 11} setTimer={setTimer} cameraRef={cameraRef} isPlaying={isPlaying} setisPlaying={setisPlaying} />
+            )
+    }, [action, isPlaying])
+
 
     return (
         <View style={{ style: 1, justifyContent: 'center', alignItems: 'center', marginTop: -150 * scale }}>
@@ -195,7 +285,7 @@ export default function Step2({ onNextStep2, setLoading, language }) {
                 right: Platform.OS === 'ios' ? 20 : 19, top: Platform.OS === 'ios' ? -22 : -17, zIndex: 999
                 //ios   right: 20, top: -22,
             }} />
-            <CameraComponent setTimer={setTimer} cameraRef={cameraRef} isPlaying={isPlaying} setisPlaying={setisPlaying} />
+            {_renderCamera()}
             {renderDes()}
             <TouchableOpacity
                 disabled={isPlaying}
