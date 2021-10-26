@@ -84,12 +84,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-eKCY-eKCYTests.xcscheme</key>
+		<key>Pods-eKYC-eKYCTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-eKCY.xcscheme</key>
+		<key>Pods-eKYC.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -115,6 +115,11 @@
 			<false/>
 		</dict>
 		<key>RNGestureHandler.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RNI18n.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

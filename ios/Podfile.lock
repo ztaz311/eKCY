@@ -351,6 +351,8 @@ PODS:
     - React
   - RNGestureHandler (1.10.3):
     - React-Core
+  - RNI18n (2.0.15):
+    - React
   - RNImageCropPicker (0.36.4):
     - React-Core
     - React-RCTImage
@@ -429,6 +431,7 @@ DEPENDENCIES:
   - ReactNativeCameraKit (from `../node_modules/react-native-camera-kit`)
   - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNI18n (from `../node_modules/react-native-i18n`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -525,6 +528,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fs"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNI18n:
+    :path: "../node_modules/react-native-i18n"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
   RNPermissions:
@@ -584,6 +589,7 @@ SPEC CHECKSUMS:
   ReactNativeCameraKit: c25ef4c32abd8918578a9ece01c90233f478c97c
   RNFS: 3ab21fa6c56d65566d1fb26c2228e2b6132e5e32
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
+  RNI18n: e2f7e76389fcc6e84f2c8733ea89b92502351fd8
   RNImageCropPicker: 73891a709e6fd8a47d32104d942757971f220aee
   RNPermissions: 7043bacbf928eae25808275cfe73799b8f618911
   RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
@@ -592,6 +598,6 @@ SPEC CHECKSUMS:
   Yoga: aa0cb45287ebe1004c02a13f279c55a95f1572f4
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 6d8dc20a5534e05483c6a4d981a475892e01733d
+PODFILE CHECKSUM: d7de7a6b4a4dd9f46c20a31110f82dbd13f9aa80
 
 COCOAPODS: 1.10.1

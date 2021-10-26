@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_eKCY_eKCYTestsVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_eKCY_eKCYTestsVersionString[];
+FOUNDATION_EXPORT double Pods_eKYCVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_eKYCVersionString[];
 

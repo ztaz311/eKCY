@@ -93,7 +93,7 @@ export default function App() {
     modalizeRef.current?.close();
   };
 
-  const [activeStep, setActiveStep] = useState(1)
+  const [activeStep, setActiveStep] = useState(0)
 
 
   const changeUpload = (name) => {

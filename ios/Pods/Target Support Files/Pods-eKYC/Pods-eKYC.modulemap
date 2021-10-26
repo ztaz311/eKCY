@@ -1,0 +1,6 @@
+module Pods_eKYC {
+  umbrella header "Pods-eKYC-umbrella.h"
+
+  export *
+  module * { export * }
+}

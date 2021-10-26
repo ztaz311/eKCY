@@ -1,6 +1,0 @@
-module Pods_eKCY_eKCYTests {
-  umbrella header "Pods-eKCY-eKCYTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
