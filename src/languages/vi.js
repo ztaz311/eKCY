@@ -25,7 +25,7 @@ export default {
     LEFT_POSE_HEAD: 'Quay sang trái',
     RIGHT_POSE_HEAD: "Quay sang phải",
     recording: "Bắt đầu thu hình sau :i giây",
-    CLOSE_LEFT_EYSE: "Nhắm mắt trái",
-    CLOSE_RIGHT_EYSE: "Nhắm mắt phải",
-    SMILE_TRANSITION: "Cười",
+    CLOSE_LEFT_EYE: "Nhắm mắt trái",
+    CLOSE_RIGHT_EYE: "Nhắm mắt phải",
+    SMILE_TRANSITION: "Cười từ từ",
 }

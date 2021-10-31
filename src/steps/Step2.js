@@ -8,7 +8,7 @@ import convertLanguage from '../languages'
 
 
 const group1 = ['LEFT_POSE_HEAD', 'RIGHT_POSE_HEAD', 'FRONTAL_FACE']
-const group2 = ['CLOSE_LEFT_EYSE', 'CLOSE_RIGHT_EYSE', 'FRONTAL_FACE']
+const group2 = ['CLOSE_LEFT_EYE', 'CLOSE_RIGHT_EYE', 'FRONTAL_FACE']
 const group3 = ['SMILE_TRANSITION', 'FRONTAL_FACE']
 
 const { width, height } = Dimensions.get('window');

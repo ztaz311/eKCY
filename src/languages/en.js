@@ -25,7 +25,7 @@ export default {
     LEFT_POSE_HEAD: 'Turn left',
     RIGHT_POSE_HEAD: "Turn right",
     recording: "Start recording after :i seconds",
-    CLOSE_LEFT_EYSE: "Close left eyse",
-    CLOSE_RIGHT_EYSE: "Close right eyse",
-    SMILE_TRANSITION: "Smile",
+    CLOSE_LEFT_EYE: "Close left eyse",
+    CLOSE_RIGHT_EYE: "Close right eyse",
+    SMILE_TRANSITION: "Smile transition",
 }
