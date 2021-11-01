@@ -93,7 +93,7 @@ export default function App() {
     modalizeRef.current?.close();
   };
 
-  const [activeStep, setActiveStep] = useState(1)
+  const [activeStep, setActiveStep] = useState(0)
 
 
   const changeUpload = (name) => {
@@ -229,7 +229,7 @@ export default function App() {
         setData({ ...data, image })
       } else {
         setLoading(false)
-        Toast.showWithGravity(res.data.message, Toast.LONG, Toast.CENTER)
+        Toast.showWithGravity('Có lỗi!', Toast.LONG, Toast.CENTER)
       }
 
     }).catch(e => {
