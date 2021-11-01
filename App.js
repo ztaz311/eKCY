@@ -93,7 +93,7 @@ export default function App() {
     modalizeRef.current?.close();
   };
 
-  const [activeStep, setActiveStep] = useState(0)
+  const [activeStep, setActiveStep] = useState(1)
 
 
   const changeUpload = (name) => {
@@ -142,7 +142,9 @@ export default function App() {
         })
         setActiveStep(1)
       } else {
-        Toast.showWithGravity('Có lỗi vui lòng thực hiện lại!', Toast.LONG, Toast.TOP)
+        // setLoading(false)
+        Toast.showWithGravity(res.data.message, Toast.LONG, Toast.CENTER)
+        // Toast.showWithGravity('Có lỗi vui lòng thực hiện lại!', Toast.LONG, Toast.TOP)
       }
       setLoading(false)
     })
@@ -183,17 +185,19 @@ export default function App() {
       await callApi('v2/images:liveness', 'POST', body).then(res => {
         console.log('liveness', res.responses);
         // [{score: 1, isLive: true},{score: 1, isLive: true},{score: 1, isLive: true}]
-        // if (res.responses !== undefined) {
-        setDataResponse({ ...dataResponse, liveness: res })
-        setLoading(false)
-        setActiveStep(2)
-        // }ele{
-        // Toast.showWithGravity('Bạn phải cấp quyền thiết bị!', Toast.LONG, Toast.CENTER)
-        // }
+        if (res.responses !== undefined) {
+          setDataResponse({ ...dataResponse, liveness: res })
+          setLoading(false)
+          setActiveStep(2)
+        } else {
+          setLoading(false)
+          Toast.showWithGravity(res.data.message, Toast.LONG, Toast.CENTER)
+        }
       })
 
     } catch (error) {
       console.log('error', error)
+      Toast.showWithGravity('Có lỗi', Toast.LONG, Toast.CENTER)
     }
   }
 
@@ -217,11 +221,20 @@ export default function App() {
 
     callApi('v2/images:verify', 'POST', body).then(res => {
       // [{isMatch: true, score: 0.6105406284332275}]
-      // console.log('verify', res);
-      setLoading(false)
-      setDataResponse({ ...dataResponse, verify: res })
-      setActiveStep(3)
-      setData({ ...data, image })
+      console.log('verify', res);
+      if (res.responses !== undefined) {
+        setLoading(false)
+        setDataResponse({ ...dataResponse, verify: res })
+        setActiveStep(3)
+        setData({ ...data, image })
+      } else {
+        setLoading(false)
+        Toast.showWithGravity(res.data.message, Toast.LONG, Toast.CENTER)
+      }
+
+    }).catch(e => {
+      console.log('e', e);
+      Toast.showWithGravity(e, Toast.LONG, Toast.CENTER)
     })
     // });
   }

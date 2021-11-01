@@ -7,6 +7,16 @@ const scale = width / 360
 
 export default function Step4({ dataResponse, data, setActiveStep, clearData, language }) {
 
+
+    let isLiveness
+    if ((dataResponse?.liveness?.responses?.filter(s => s?.isLive == true)?.length === 3 && dataResponse?.liveness?.responses.length === 3) ||
+        (dataResponse?.liveness?.responses?.filter(s => s?.isLive == true)?.length === 2 && dataResponse?.liveness?.responses.length === 2)
+    ) {
+        isLiveness = true
+    } else {
+        isLiveness = false
+    }
+
     return (
         <View style={{ flex: 1, justifyContent: 'flex-start' }}>
             <View style={{ flexDirection: 'row', justifyContent: "space-between", alignItems: 'center' }}>
@@ -23,7 +33,7 @@ export default function Step4({ dataResponse, data, setActiveStep, clearData, la
                 </View>
                 <View style={{ flexDirection: 'row', borderColor: 'white', borderBottomWidth: 1, paddingBottom: 10 * scale }}>
                     <Text style={{ color: 'white', fontSize: 15 * scale, marginRight: 10 * scale, flex: 3 / 5 }}>{convertLanguage(language, 'result_liveness')}</Text>
-                    <Text style={{ fontSize: 15 * scale, fontWeight: 'bold', color: dataResponse?.liveness?.responses?.filter(s => s?.isLive == true)?.length === 3 ? 'green' : 'red', flex: 2 / 5 }}>{dataResponse?.liveness?.responses?.filter(s => s.isLive == true)?.length === 3 ? convertLanguage(language, 'succsess') : convertLanguage(language, 'failure')}</Text>
+                    <Text style={{ fontSize: 15 * scale, fontWeight: 'bold', color: isLiveness ? 'green' : 'red', flex: 2 / 5 }}>{isLiveness ? convertLanguage(language, 'succsess') : convertLanguage(language, 'failure')}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', borderColor: 'white', borderBottomWidth: 1, paddingBottom: 10 * scale }}>
                     <Text style={{ color: 'white', fontSize: 15 * scale, marginRight: 10 * scale, flex: 3 / 5 }}>{convertLanguage(language, 'fullname')}</Text>

@@ -97,7 +97,7 @@ export default function Step1({ onOpenModalize, upload, onCloseModalize, setUplo
                             onPress={() => { onOpenModalize(), setChoose('back') }}
                         >
                             <Image style={styles.ic_camera} source={require('../assets/camera2.png')} />
-                            <Text style={styles.txtUpdateImage}>Sửa ảnh</Text>
+                            <Text style={styles.txtUpdateImage}>{convertLanguage(language, 'edit_image')}</Text>
                         </TouchableOpacity>
                     </View>
             }
