@@ -12,7 +12,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "eKYC";
+    return "eKYCVDSense";
   }
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {

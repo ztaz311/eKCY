@@ -1,0 +1,6 @@
+module Pods_eKYCVDSense_eKYCVDSenseTests {
+  umbrella header "Pods-eKYCVDSense-eKYCVDSenseTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
