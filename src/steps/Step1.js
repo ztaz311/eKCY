@@ -4,6 +4,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import convertLanguage from '../languages'
 const { width, height } = Dimensions.get('window');
 const scale = width / 360
+const verticalScale = height / 592
 
 export default function Step1({ onOpenModalize, upload, onCloseModalize, setUpload, data, setData, language }) {
     const [choose, setChoose] = useState('front')
@@ -12,8 +13,8 @@ export default function Step1({ onOpenModalize, upload, onCloseModalize, setUplo
     // Open Camera
     const onUploadCamera = () => {
         ImagePicker.openCamera({
-            width: 700,
-            height: 400,
+            width: 650 * scale,
+            height: 300 * verticalScale,
             includeBase64: true,
             cropping: true,
         }).then(image => {
@@ -28,8 +29,8 @@ export default function Step1({ onOpenModalize, upload, onCloseModalize, setUplo
     // Open Open Library image
     const onUploadFile = () => {
         ImagePicker.openPicker({
-            width: 700,
-            height: 400,
+            width: 650 * scale,
+            height: 300 * verticalScale,
             cropping: true,
             mediaType: 'photo',
             includeBase64: true,
@@ -111,7 +112,8 @@ const styles = StyleSheet.create({
     },
     imgPick: {
         width: 295 * scale,
-        height: 165 * scale,
+        // height: 165 * scale,
+        height: 150 * verticalScale,
         borderRadius: 16
     },
     boxPick: {
@@ -132,7 +134,7 @@ const styles = StyleSheet.create({
         borderColor: 'white',
         borderRadius: 16,
         width: 295 * scale,
-        height: 165 * scale,
+        height: 150 * verticalScale, //165 *scale
         borderWidth: 2,
         justifyContent: 'center',
         alignItems: 'center',
