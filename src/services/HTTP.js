@@ -16,7 +16,8 @@ export default callApi = async (endpoint, method = 'GET', body, header = '') => 
     console.log('HTTP', response);
     return response.data;
   }).catch((error) => {
-    console.log('HTTP123', error);
+    console.log('HTTPError', error);
+    console.log('HTTPError2', endpoint, body);
     return error.response
   });
 }

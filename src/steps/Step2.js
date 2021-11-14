@@ -108,7 +108,7 @@ export default function Step2({ onNextStep2, setLoading, language }) {
         //     onNextStep2(data)
         // }
         if (Array.isArray(data[action[action.length - 1]]) && data[action[action.length - 1]].length === 10) {
-            setLoading(true)
+            // setLoading(true)
             onNextStep2(data)
             // console.log('data', data);
         }

@@ -78,7 +78,11 @@ export default function App() {
       image: ''
     })
   }
-
+  const [state, setState] = useState({
+    step1: {},
+    step2: {},
+    step3: {}
+  })
   const [dataResponse, setDataResponse] = useState({})
 
   const [upload, setUpload] = useState({
@@ -102,6 +106,54 @@ export default function App() {
     })
   }
 
+
+  const fetchStep1 = (body) => {
+    return callApi('v2/images:annotate', 'POST', body)
+    // .then(res => {
+    //   if (res?.responses?.length === 2 && res?.responses[0].results[0]?.objects?.length === 6 && res?.responses[1].results[0]?.objects?.length >= 2) {
+    //     console.log('step1', res)
+    //     setDataResponse({
+    //       ...dataResponse,
+    //       card_front: res?.responses[0].results[0]?.objects,
+    //       card_end: res?.responses[1].results[0]?.objects
+    //     })
+    //   } else {
+    //     // Toast.showWithGravity(res.data.message, Toast.LONG, Toast.CENTER)
+    //   }
+    //   // setLoading(false)
+    // })
+  }
+
+  const fetchStep2 = (body) => {
+    return callApi('v2/images:liveness', 'POST', body)
+    // .then(res => {
+    //   console.log('step2', res)
+    //   // [{score: 1, isLive: true},{score: 1, isLive: true},{score: 1, isLive: true}]
+    //   if (res.responses !== undefined) {
+    //     setDataResponse({ ...dataResponse, liveness: res })
+    //   } else {
+    //     // Toast.showWithGravity(res.data.message, Toast.LONG, Toast.CENTER)
+    //   }
+    // })
+  }
+
+  const fetchStep3 = (body) => {
+    return callApi('v2/images:verify', 'POST', body)
+    // .then(res => {
+    //   console.log('step3', res)
+    //   // [{isMatch: true, score: 0.6105406284332275}]
+    //   if (res.responses !== undefined) {
+    //     setDataResponse({ ...dataResponse, verify: res })
+    //     setData({ ...data, image })
+    //   } else {
+    //     // setLoading(false)
+    //     // Toast.showWithGravity('Có lỗi!', Toast.LONG, Toast.CENTER)
+    //   }
+
+    // }).catch(e => {
+    //   Toast.showWithGravity(e, Toast.LONG, Toast.CENTER)
+    // })
+  }
 
 
   // Call Api CMND
@@ -131,23 +183,26 @@ export default function App() {
       ]
     }
 
-    setLoading(true)
-    callApi('v2/images:annotate', 'POST', body).then(res => {
-      console.log('res', res);
-      if (res?.responses?.length === 2 && res?.responses[0].results[0]?.objects?.length === 6 && res?.responses[1].results[0]?.objects?.length >= 2) {
-        setDataResponse({
-          ...dataResponse,
-          card_front: res?.responses[0].results[0]?.objects,
-          card_end: res?.responses[1].results[0]?.objects
-        })
-        setActiveStep(1)
-      } else {
-        // setLoading(false)
-        Toast.showWithGravity(res.data.message, Toast.LONG, Toast.CENTER)
-        // Toast.showWithGravity('Có lỗi vui lòng thực hiện lại!', Toast.LONG, Toast.TOP)
-      }
-      setLoading(false)
-    })
+
+    setState({ ...state, step1: body })
+    setActiveStep(1)
+    // setLoading(true)
+    // callApi('v2/images:annotate', 'POST', body).then(res => {
+    //   console.log('res', res);
+    //   if (res?.responses?.length === 2 && res?.responses[0].results[0]?.objects?.length === 6 && res?.responses[1].results[0]?.objects?.length >= 2) {
+    //     setDataResponse({
+    //       ...dataResponse,
+    //       card_front: res?.responses[0].results[0]?.objects,
+    //       card_end: res?.responses[1].results[0]?.objects
+    //     })
+    //     setActiveStep(1)
+    //   } else {
+    //     // setLoading(false)
+    //     Toast.showWithGravity(res.data.message, Toast.LONG, Toast.CENTER)
+    //     // Toast.showWithGravity('Có lỗi vui lòng thực hiện lại!', Toast.LONG, Toast.TOP)
+    //   }
+    //   setLoading(false)
+    // })
   };
 
 
@@ -180,23 +235,24 @@ export default function App() {
       }
 
       let body = await { requests }
+      setState({ ...state, step2: body })
+      setActiveStep(2)
+      // setLoading(false)
 
-      console.log('body', body);
-      await callApi('v2/images:liveness', 'POST', body).then(res => {
-        console.log('liveness', res.responses);
-        // [{score: 1, isLive: true},{score: 1, isLive: true},{score: 1, isLive: true}]
-        if (res.responses !== undefined) {
-          setDataResponse({ ...dataResponse, liveness: res })
-          setLoading(false)
-          setActiveStep(2)
-        } else {
-          setLoading(false)
-          Toast.showWithGravity(res.data.message, Toast.LONG, Toast.CENTER)
-        }
-      })
+      // await callApi('v2/images:liveness', 'POST', body).then(res => {
+      //   console.log('liveness', res.responses);
+      //   // [{score: 1, isLive: true},{score: 1, isLive: true},{score: 1, isLive: true}]
+      //   if (res.responses !== undefined) {
+      //     setDataResponse({ ...dataResponse, liveness: res })
+      //     setLoading(false)
+      //     setActiveStep(2)
+      //   } else {
+      //     setLoading(false)
+      //     Toast.showWithGravity(res.data.message, Toast.LONG, Toast.CENTER)
+      //   }
+      // })
 
     } catch (error) {
-      console.log('error', error)
       Toast.showWithGravity('Có lỗi', Toast.LONG, Toast.CENTER)
     }
   }
@@ -219,23 +275,31 @@ export default function App() {
       }]
     }
 
-    callApi('v2/images:verify', 'POST', body).then(res => {
-      // [{isMatch: true, score: 0.6105406284332275}]
-      console.log('verify', res);
-      if (res.responses !== undefined) {
-        setLoading(false)
-        setDataResponse({ ...dataResponse, verify: res })
-        setActiveStep(3)
-        setData({ ...data, image })
-      } else {
-        setLoading(false)
-        Toast.showWithGravity('Có lỗi!', Toast.LONG, Toast.CENTER)
-      }
-
-    }).catch(e => {
-      console.log('e', e);
-      Toast.showWithGravity(e, Toast.LONG, Toast.CENTER)
+    console.log('state', state)
+    setLoading(true)
+    await Promise.all([fetchStep1(state.step1), fetchStep2(state.step2), fetchStep3(body)]).then(res => {
+      console.log('res', res)
+      // setLoading(false)
+      // setActiveStep(3)
     })
+
+
+
+    // callApi('v2/images:verify', 'POST', body).then(res => {
+    //   // [{isMatch: true, score: 0.6105406284332275}]
+    //   if (res.responses !== undefined) {
+    //     setLoading(false)
+    //     setDataResponse({ ...dataResponse, verify: res })
+    //     setActiveStep(3)
+    //     setData({ ...data, image })
+    //   } else {
+    //     setLoading(false)
+    //     Toast.showWithGravity('Có lỗi!', Toast.LONG, Toast.CENTER)
+    //   }
+
+    // }).catch(e => {
+    //   Toast.showWithGravity(e, Toast.LONG, Toast.CENTER)
+    // })
     // });
   }
 

@@ -28,7 +28,7 @@ export default function Step3({ onNextStep3, setLoading, language }) {
     }
     // capture camera
     const takePicture = React.useCallback(async () => {
-        setLoading(true)
+        // setLoading(true)
         const images = await cameraRef?.current.capture()
         onNextStep3(await resize(images.uri))
     }, []);
