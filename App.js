@@ -24,7 +24,6 @@ const defaultScrollViewProps = {
   contentContainerStyle: {
     flex: 1,
     justifyContent: 'center',
-    // backgroundColor:
   },
   scrollEnabled: false
 };
@@ -62,45 +61,45 @@ export default function App() {
     checkPermission()
   }, [])
 
-  const modalizeRef = useRef(null);
-  const [loading, setLoading] = useState(false)
-  const [language, setLanguage] = useState(null)
+  const modalizeRef = useRef(null); // call method modal cardID
+  const [loading, setLoading] = useState(false) // set loading 
+  const [language, setLanguage] = useState(null) // set language 
 
-  const [data, setData] = useState({
+  const [data, setData] = useState({     // data image cardID base64
     card_front: '',
     card_back: '',
     image: ''
   })
-  const clearData = () => {
+  const clearData = () => {           // clear data cardID
     setData({
       card_front: '',
       card_back: '',
       image: ''
     })
   }
-  const [state, setState] = useState({
+  const [state, setState] = useState({    // body request 
     step1: {},
     step2: {},
     step3: {}
   })
-  const [dataResponse, setDataResponse] = useState({})
+  const [dataResponse, setDataResponse] = useState({}) //  resonse api return
 
-  const [upload, setUpload] = useState({
+  const [upload, setUpload] = useState({          // flag camera or library 
     camera: 0,
     file: 0
   })
 
-  const onOpenModalize = () => {
+  const onOpenModalize = () => {              // method open modalize
     modalizeRef.current?.open();
   };
-  const onCloseModalize = () => {
+  const onCloseModalize = () => {              // method close modalize
     modalizeRef.current?.close();
   };
 
-  const [activeStep, setActiveStep] = useState(0)
+  const [activeStep, setActiveStep] = useState(0)         // value step - step1 is 0 
 
 
-  const changeUpload = (name) => {
+  const changeUpload = (name) => {                // chage camera or library
     setUpload({
       ...upload, [name]: upload[name] + 1
     })
@@ -260,9 +259,6 @@ export default function App() {
 
   // Call Api check face
   const onNextStep3 = async (image) => {
-
-
-    // await read(image, "base64").then(contents => {
     var body = {
       "requests": [{
         "images": [{
@@ -275,15 +271,25 @@ export default function App() {
       }]
     }
 
-    console.log('state', state)
     setLoading(true)
-    await Promise.all([fetchStep1(state.step1), fetchStep2(state.step2), fetchStep3(body)]).then(res => {
-      console.log('res', res)
-      // setLoading(false)
-      // setActiveStep(3)
-    })
-
-
+    try {
+      await Promise.all([fetchStep1(state.step1), fetchStep2(state.step2), fetchStep3(body)]).then(res => {
+        if (res.length === 3) {
+          setDataResponse({
+            ...dataResponse,
+            card_front: res[0]?.responses[0].results[0]?.objects,
+            card_end: res[0]?.responses[1].results[0]?.objects,
+            liveness: res[1],
+            verify: res[2]
+          })
+        }
+        setLoading(false)
+        setActiveStep(3)
+      })
+    } catch (e) {
+      setLoading(false)
+      setActiveStep(3)
+    }
 
     // callApi('v2/images:verify', 'POST', body).then(res => {
     //   // [{isMatch: true, score: 0.6105406284332275}]

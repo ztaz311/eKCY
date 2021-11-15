@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Dimensions, Text, TouchableOpacity, View } from 'react-native';
 import { Camera, CameraType } from 'react-native-camera-kit';
 import convertLanguage from '../languages'
@@ -9,7 +9,12 @@ const scale = width / 360
 var RNFS = require('react-native-fs');
 
 export default function Step3({ onNextStep3, setLoading, language }) {
-
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 250);
+    }, [])
     const cameraRef = useRef(null)
 
     const resize = async (pathName) => {

@@ -31,7 +31,12 @@ export default function Step2({ onNextStep2, setLoading, language }) {
     const [data, setData] = useState({})
     const [action, setAction] = useState([])
     const [valueCapture] = useState(0)
-
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 250);
+    }, [])
 
     useEffect(() => {
         let group = get_random([group1, group2, group3])
@@ -43,7 +48,6 @@ export default function Step2({ onNextStep2, setLoading, language }) {
     function get_random(list) {
         return list[Math.floor((Math.random() * list.length))];
     }
-    console.log('action', action);
     // capturing camera
     useEffect(async () => {
         if (isPlaying) {
