@@ -11,6 +11,7 @@ import Step2 from './src/steps/Step2';
 import Step3 from './src/steps/Step3';
 import Step4 from './src/steps/Step4';
 import convertLanguage from './src/languages'
+import SplashScreen from 'react-native-splash-screen'
 
 const { width, height } = Dimensions.get('window');
 const scale = width / 360
@@ -58,6 +59,9 @@ export default function App() {
     })
   }
   useEffect(() => {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1200);
     checkPermission()
   }, [])
 
@@ -320,14 +324,16 @@ export default function App() {
           hidden={false} />
         {loading && <ActivityIndicator size="large" color="green" style={{ zIndex: 999, backgroundColor: '#c7c7c7', opacity: 0.9, flex: 1, position: 'absolute', top: 0, bottom: 0, right: 0, left: 0 }} />}
 
-        {language === null && <View style={{ position: 'absolute', top: 0, bottom: 0, backgroundColor: 'black', right: 0, left: 0, zIndex: 999, justifyContent: 'center', alignItems: 'center' }}>
-          <TouchableOpacity onPress={() => setLanguage('en')} style={{ backgroundColor: 'white', width: 150 * scale, height: 70 * scale, borderRadius: 24, justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={{ fontWeight: 'bold', fontSize: 18 * scale }}>English</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => setLanguage('vi')} style={{ marginTop: 20 * scale, backgroundColor: 'white', width: 150 * scale, height: 70 * scale, borderRadius: 24, justifyContent: 'center', alignItems: 'center' }}>
-            <Text style={{ fontWeight: 'bold', fontSize: 18 * scale }}>Tiếng việt</Text>
-          </TouchableOpacity>
-        </View>}
+        {language === null &&
+          <View style={{ position: 'absolute', top: 0, bottom: 0, backgroundColor: 'white', right: 0, left: 0, zIndex: 999, justifyContent: 'center', alignItems: 'center' }}>
+            <Image source={require('./src/assets/Launch1.png')} style={{ width: 180 * scale, height: 140 * scale, marginTop: -50, marginBottom: 10 }} resizeMode="contain" />
+            <TouchableOpacity onPress={() => setLanguage('en')} style={{ borderWidth: 3, borderColor: 'black', backgroundColor: 'white', width: 150 * scale, height: 70 * scale, borderRadius: 24, justifyContent: 'center', alignItems: 'center' }}>
+              <Text style={{ fontWeight: 'bold', fontSize: 18 * scale }}>English</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setLanguage('vi')} style={{ borderWidth: 3, borderColor: 'black', marginTop: 20 * scale, backgroundColor: 'white', width: 150 * scale, height: 70 * scale, borderRadius: 24, justifyContent: 'center', alignItems: 'center' }}>
+              <Text style={{ fontWeight: 'bold', fontSize: 18 * scale }}>Tiếng việt</Text>
+            </TouchableOpacity>
+          </View>}
 
 
         <View style={{ flex: 1, marginHorizontal: 12 * scale }}>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e73951f4-9482-43ea-8f12-30375461b80a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/android/.idea/assetWizardSettings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/libraries/Gradle__androidx_core_core_1_7_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/libraries/Gradle__androidx_core_core_ktx_1_7_0_aar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/libraries/Gradle__junit_junit_4_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/libraries/Gradle__org_hamcrest_hamcrest_core_1_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/modules/-1652904821/eKYCVDSense.react-native-permissions.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/modules/-1794766119/eKYCVDSense.react-native-splash-screen.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/modules/-505259328/eKYCVDSense.react-native-image-crop-picker.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/modules/-698602133/eKYCVDSense.react-native-svg.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/modules/-88807417/eKYCVDSense.react-native-camera-kit.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/modules/-937402861/eKYCVDSense.react-native-image-resizer.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/modules/-984829274/eKYCVDSense.react-native-fs.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/modules/1083262135/eKYCVDSense.react-native-i18n.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/modules/196007708/eKYCVDSense.react-native-community_image-editor.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/modules/256698701/eKYCVDSense.react-native-gesture-handler.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/modules/app/eKYCVDSense.app.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/.idea/modules/eKYCVDSense.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/eKYCVDSense/Images.xcassets/LaunchScreen.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/eKYCVDSense/Images.xcassets/LaunchScreen.imageset/MicrosoftTeams-image-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/eKYCVDSense/Images.xcassets/LaunchScreen.imageset/MicrosoftTeams-image-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/eKYCVDSense/Images.xcassets/LaunchScreen.imageset/MicrosoftTeams-image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/eKYCVDSense/Images.xcassets/LaunchScreen2.imageset/Contents.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/eKYCVDSense/Images.xcassets/LaunchScreen2.imageset/Launch2-1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/eKYCVDSense/Images.xcassets/LaunchScreen2.imageset/Launch2-2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/eKYCVDSense/Images.xcassets/LaunchScreen2.imageset/Launch2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/ekyc.storyboard" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.9/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.9/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.9/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.9/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.9/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.9/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.9/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.9/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.9/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.9/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.9/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.9/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.9/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.9/javaCompile/jarAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.9/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.9/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/6.9/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/6.9/javaCompile/taskHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/ekcy/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/com/ekcy/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/ReactNativeCameraKit/CKCamera.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/ReactNativeCameraKit/CKCameraManager.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/ReactNativeCameraKit/CKCameraOverlayView.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/ReactNativeCameraKit/CKCompressedImage.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/ReactNativeCameraKit/CKMockPreview.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Private/ReactNativeCameraKit/CKOverlayObject.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Public/ReactNativeCameraKit/CKCamera.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Public/ReactNativeCameraKit/CKCameraManager.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Public/ReactNativeCameraKit/CKCameraOverlayView.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Public/ReactNativeCameraKit/CKCompressedImage.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Public/ReactNativeCameraKit/CKMockPreview.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Headers/Public/ReactNativeCameraKit/CKOverlayObject.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Manifest.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Manifest.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/trantuananh.xcuserdatad/xcschemes/ReactNativeCameraKit.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/trantuananh.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Pods.xcodeproj/xcuserdata/trantuananh.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense-eKYCVDSenseTests/Pods-eKYCVDSense-eKYCVDSenseTests-acknowledgements.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense-eKYCVDSenseTests/Pods-eKYCVDSense-eKYCVDSenseTests-acknowledgements.markdown" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense-eKYCVDSenseTests/Pods-eKYCVDSense-eKYCVDSenseTests-acknowledgements.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense-eKYCVDSenseTests/Pods-eKYCVDSense-eKYCVDSenseTests-acknowledgements.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense-eKYCVDSenseTests/Pods-eKYCVDSense-eKYCVDSenseTests.debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense-eKYCVDSenseTests/Pods-eKYCVDSense-eKYCVDSenseTests.debug.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense-eKYCVDSenseTests/Pods-eKYCVDSense-eKYCVDSenseTests.release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense-eKYCVDSenseTests/Pods-eKYCVDSense-eKYCVDSenseTests.release.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense/Pods-eKYCVDSense-acknowledgements.markdown" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense/Pods-eKYCVDSense-acknowledgements.markdown" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense/Pods-eKYCVDSense-acknowledgements.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense/Pods-eKYCVDSense-acknowledgements.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense/Pods-eKYCVDSense.debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense/Pods-eKYCVDSense.debug.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense/Pods-eKYCVDSense.release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Pods/Target Support Files/Pods-eKYCVDSense/Pods-eKYCVDSense.release.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Target Support Files/ReactNativeCameraKit/ReactNativeCameraKit-dummy.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Target Support Files/ReactNativeCameraKit/ReactNativeCameraKit-prefix.pch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Target Support Files/ReactNativeCameraKit/ReactNativeCameraKit.debug.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Pods/Target Support Files/ReactNativeCameraKit/ReactNativeCameraKit.release.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/eKYC.xcworkspace/xcuserdata/trantuananh.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/ios/eKYC.xcworkspace/xcuserdata/trantuananh.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/eKYCVDSense.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/eKYCVDSense.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/eKYCVDSense.xcodeproj/xcuserdata/trantuananh.xcuserdatad/xcschemes/xcschememanagement.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/eKYCVDSense.xcodeproj/xcuserdata/trantuananh.xcuserdatad/xcschemes/xcschememanagement.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/eKYCVDSense.xcworkspace/xcuserdata/trantuananh.xcuserdatad/UserInterfaceState.xcuserstate" beforeDir="false" afterPath="$PROJECT_DIR$/ios/eKYCVDSense.xcworkspace/xcuserdata/trantuananh.xcuserdatad/UserInterfaceState.xcuserstate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/eKYCVDSense/AppDelegate.m" beforeDir="false" afterPath="$PROJECT_DIR$/ios/eKYCVDSense/AppDelegate.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/eKYCVDSense/Images.xcassets/Contents.json" beforeDir="false" afterPath="$PROJECT_DIR$/ios/eKYCVDSense/Images.xcassets/Contents.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/eKYCVDSense/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/eKYCVDSense/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="21bHvjJTfZRPk77UL837cDBU4qs" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e73951f4-9482-43ea-8f12-30375461b80a" name="Default Changelist" comment="" />
+      <created>1638203098929</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1638203098929</updated>
+    </task>
+    <servers />
+  </component>
+</project>

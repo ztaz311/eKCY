@@ -121,6 +121,7 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 def enableHermes = project.ext.react.get("enableHermes", true);
 
 android {
+    aaptOptions { cruncherEnabled = false }
     ndkVersion rootProject.ext.ndkVersion
     lintOptions { 
     checkReleaseBuilds false 
@@ -189,7 +190,7 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation "com.squareup.okhttp3:okhttp:4.7.2"
-
+    implementation project(':react-native-splash-screen')
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
