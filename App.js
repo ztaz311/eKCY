@@ -326,7 +326,7 @@ export default function App() {
 
         {language === null &&
           <View style={{ position: 'absolute', top: 0, bottom: 0, backgroundColor: 'white', right: 0, left: 0, zIndex: 999, justifyContent: 'center', alignItems: 'center' }}>
-            <Image source={require('./src/assets/Launch1.png')} style={{ width: 180 * scale, height: 140 * scale, marginTop: -50, marginBottom: 10 }} resizeMode="contain" />
+            <Image source={require('./src/assets/Launch2.png')} style={{ width: 250 * scale, height: 170 * scale, marginTop: -50, marginBottom: 10 }} resizeMode="contain" />
             <TouchableOpacity onPress={() => setLanguage('en')} style={{ borderWidth: 3, borderColor: 'black', backgroundColor: 'white', width: 150 * scale, height: 70 * scale, borderRadius: 24, justifyContent: 'center', alignItems: 'center' }}>
               <Text style={{ fontWeight: 'bold', fontSize: 18 * scale }}>English</Text>
             </TouchableOpacity>

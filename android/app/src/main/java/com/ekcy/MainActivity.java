@@ -1,4 +1,4 @@
-package com.ekcy;
+package com.ekcyh2t;
 import android.os.Bundle; // here
 import org.devio.rn.splashscreen.SplashScreen; // here
 
